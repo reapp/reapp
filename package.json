@@ -1,6 +1,6 @@
 {
   "name": "reapp",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "a server, build system, and helpers for react apps",
   "main": "index.js",
   "scripts": {
@@ -9,12 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/reapp/reapp-kit.git"
+    "url": "git://github.com/reapp/reapp.git"
   },
   "author": "Nate Wienert",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/reapp/reapp-kit/issues"
+    "url": "https://github.com/reapp/reapp/issues"
   },
-  "homepage": "https://github.com/reapp/reapp-kit"
+  "homepage": "https://github.com/reapp/reapp",
+  "dependencies": {
+    "commander": "~2.5.1"
+  }
 }

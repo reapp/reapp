@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+var Program = require('..');
+
+Program
+  .option('-p, --production', 'run in production mode')
+  .parse(process.argv);
+
+var App = require('./app/routes');

@@ -7,6 +7,7 @@ if (Env.CLIENT) {
 }
 
 module.exports = {
+  run: require('./run'),
   env: require('./env'),
   helpers: require('./helpers/helpers'),
   mixins: require('./mixins/mixins'),

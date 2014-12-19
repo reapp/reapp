@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+var Program = require('commander');
+
+Program
+  .version(require('./package.json').version)
+  .command('new [name]', 'creates a directory with a new reapp base installed')
+  .command('run', 'runs a reapp application')
+  .parse(process.argv);

@@ -1,3 +1,8 @@
+// you can consider this the base of your app
+// takes in your routes, and runs them
+// for now, we are forcing react-router and bluebird
+// but in the future we can make this pluggable
+
 var React  = require('react');
 var Router = require('react-router');
 var { Promise } = require('bluebird');

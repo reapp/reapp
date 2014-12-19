@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+var Program = require('..');
+
+Program
+  .parse(process.argv);
+
+var name = Program.args;
+
+if (!name.length) {
+  console.error('must give a name after "new" (ex: reapp new myname)');
+  process.exit(1);
+}
+
+if (name.length > 1) {
+  console.error('sorry, we don\'t support multiple names');
+}
+
+console.log();
+console.log('creating reapp: %s...', name[0]);
+
+//
+
+console.log();
