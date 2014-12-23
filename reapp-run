@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 
-var Program = require('..');
+var Program = require('commander');
 
 Program
   .option('-p, --production', 'run in production mode')
   .parse(process.argv);
 
-var App = require('./app/routes');
+var Server = require('reapp-server');
+
+Server(process.cwd() + '/app/routes');
+

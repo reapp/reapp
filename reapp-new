@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var Program = require('..');
+var Program = require('commander');
 
 Program
   .parse(process.argv);

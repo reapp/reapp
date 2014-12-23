@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/reapp/reapp",
   "dependencies": {
-    "commander": "~2.5.1"
+    "commander": "~2.5.1",
+    "reapp-server": "*"
   }
 }

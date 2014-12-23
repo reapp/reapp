@@ -7,3 +7,7 @@ Program
   .command('new [name]', 'creates a directory with a new reapp base installed')
   .command('run', 'runs a reapp application')
   .parse(process.argv);
+
+// default to run
+if (!Program.args.length)
+  Program.run();
