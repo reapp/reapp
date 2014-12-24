@@ -1,12 +1,28 @@
 #!/usr/bin/env node
 
 var Program = require('commander');
-
-Program
-  .option('-p, --production', 'run in production mode')
-  .parse(process.argv);
-
 var Server = require('reapp-server');
 
-Server(process.cwd() + '/app/routes');
+Program
+  .option('-e, --entry [path]', 'provide an entry [path] for your app', './app/routes')
+  .option('-d, --development', 'run in development mode')
+  .option('-h, --hot', 'run react-hot server')
+  .option('-t, --tool [tool]', 'which webpack devtool to use', 'eval')
+  .parse(process.argv);
 
+if (Program.development)
+  Program.devtool = 'sourcemap';
+
+if (Program.entry.indexOf('./') === 0)
+  Program.entry = process.cwd() + Program.entry.slice(1);
+
+var serverOpts = {
+  entry: Program.entry,
+  dev: Program.development,
+  debug: Program.development,
+  hot: Program.hot,
+  devtool: Program.devtool
+};
+
+console.log("running with options\n", serverOpts);
+Server(serverOpts);

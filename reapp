@@ -8,6 +8,18 @@ Program
   .command('run', 'runs a reapp application')
   .parse(process.argv);
 
-// default to run
-if (!Program.args.length)
-  Program.run();
+// defaults to run
+if (!Program.args.length) {
+  var exec = require('child_process').spawn;
+  var child = exec('./reapp-run');
+
+  child.stdout.on('data', function(data) {
+      console.log('stdout: ' + data);
+  });
+  child.stderr.on('data', function(data) {
+      console.log('stdout: ' + data);
+  });
+  child.on('close', function(code) {
+      console.log('closing code: ' + code);
+  });
+}
