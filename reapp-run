@@ -10,13 +10,16 @@ Program
   .option('-t, --tool [tool]', 'which webpack devtool to use', 'eval')
   .parse(process.argv);
 
+var dir = process.cwd();
+
 if (Program.development)
   Program.devtool = 'sourcemap';
 
 if (Program.entry.indexOf('./') === 0)
-  Program.entry = process.cwd() + Program.entry.slice(1);
+  Program.entry = dir + Program.entry.slice(1);
 
 var serverOpts = {
+  dir: dir,
   entry: Program.entry,
   dev: Program.development,
   debug: Program.development,
