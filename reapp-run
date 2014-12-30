@@ -4,15 +4,15 @@ var Program = require('commander');
 var Server = require('reapp-server');
 
 Program
-  .option('-e, --entry [path]', 'provide an entry [path] for your app', './app/routes')
-  .option('-d, --development', 'run in development mode')
-  .option('-h, --hot', 'run react-hot server')
+  .option('-e, --entry [path]', 'provide an entry [path] for your app', './app/app')
+  .option('-p, --production', 'run in production mode')
+  .option('-d, --debug', 'output extra information for debugging')
   .option('-t, --tool [tool]', 'which webpack devtool to use', 'eval')
   .parse(process.argv);
 
 var dir = process.cwd();
 
-if (Program.development)
+if (!Program.production) // todo check if they havent passed this in too
   Program.devtool = 'sourcemap';
 
 if (Program.entry.indexOf('./') === 0)
@@ -21,9 +21,9 @@ if (Program.entry.indexOf('./') === 0)
 var serverOpts = {
   dir: dir,
   entry: Program.entry,
-  dev: Program.development,
-  debug: Program.development,
-  hot: Program.hot,
+  prod: !!Program.production,
+  hot: !Program.production,
+  debug: !!Program.debug,
   devtool: Program.devtool
 };
 
