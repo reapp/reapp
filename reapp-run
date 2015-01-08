@@ -6,27 +6,20 @@ var Server = require('reapp-server');
 Program
   .option('-d, --debug', 'output extra information for debugging')
   .option('-e, --entry <path>', 'provide an entry [path] for your app', './app/app')
-  .option('-m, --mode <mode>', 'run in a [mode] production, development', 'development')
+  .option('-m, --mode <mode>', 'run in a [mode] using a webpack config file', 'development')
   .option('-p, --port <number>', 'specify a port [number]', parseInt)
-  .option('-t, --tool <tool>', 'which webpack devtool to use', 'eval')
   .parse(process.argv);
 
 var dir = process.cwd();
-var prod = Program.mode === 'production';
-
-if (!prod)
-  Program.devtool = 'sourcemap';
 
 if (Program.entry.indexOf('./') === 0)
   Program.entry = dir + Program.entry.slice(1);
 
 var serverOpts = {
   dir: dir,
+  mode: Program.mode,
   entry: Program.entry,
-  prod: !!prod,
-  hot: !prod,
   debug: !!Program.debug,
-  devtool: Program.devtool,
   port: Program.port
 };
 
