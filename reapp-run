@@ -8,6 +8,7 @@ Program
   .option('-e, --entry <path>', 'provide an entry [path] for your app', './app/app')
   .option('-m, --mode <mode>', 'run in a [mode] using a webpack config file', 'development')
   .option('-p, --port <number>', 'specify a port [number]', parseInt)
+  .option('-c, --cold', 'run without hot-reload mode')
   .parse(process.argv);
 
 var dir = process.cwd();
@@ -20,7 +21,8 @@ var serverOpts = {
   mode: Program.mode,
   entry: Program.entry,
   debug: !!Program.debug,
-  port: Program.port
+  port: Program.port,
+  hot: !Program.cold
 };
 
 if (Program.debug) {
