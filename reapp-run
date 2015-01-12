@@ -23,5 +23,9 @@ var serverOpts = {
   port: Program.port
 };
 
-console.log("running with options\n", serverOpts);
+if (Program.debug) {
+  console.log('running with options');
+  console.dir(serverOpts);
+}
+
 Server(serverOpts);
