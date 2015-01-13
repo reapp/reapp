@@ -1,25 +1,14 @@
 #!/usr/bin/env node
 
+if (process.argv.length === 2) {
+  process.argv.push('--help');
+}
+
 var Program = require('commander');
 
 Program
   .version(require('./package.json').version)
   .command('new [name]', 'creates a directory with a new reapp base installed')
-  .command('run', 'runs a reapp application')
-  .parse(process.argv);
+  .command('run', 'runs a reapp application');
 
-// defaults to run
-if (!Program.args.length) {
-  var exec = require('child_process').spawn;
-  var child = exec('./reapp-run');
-
-  child.stdout.on('data', function(data) {
-      console.log('stdout: ' + data);
-  });
-  child.stderr.on('data', function(data) {
-      console.log('stdout: ' + data);
-  });
-  child.on('close', function(code) {
-      console.log('closing code: ' + code);
-  });
-}
+Program.parse(process.argv);
