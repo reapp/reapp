@@ -19,6 +19,9 @@
   "homepage": "https://github.com/reapp/reapp",
   "dependencies": {
     "commander": "~2.5.1",
-    "reapp-server": "*"
+    "reapp-server": "*",
+    "nodegit": "~0.2.4",
+    "rimraf": "~2.2.8",
+    "replace": "~0.3.0"
   }
 }

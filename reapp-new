@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 
 var Program = require('commander');
+var fs = require('fs');
+var NodeGit = require('nodegit');
+var Repository = NodeGit.Repository;
+var clone = NodeGit.Clone.clone;
+var rimraf = require('rimraf');
+var Promise = require('bluebird').Promise;
+var replace = require('replace');
 
 Program
   .parse(process.argv);
@@ -12,13 +19,79 @@ if (!name.length) {
   process.exit(1);
 }
 
-if (name.length > 1) {
+if (name.length > 1)
   console.error('sorry, we don\'t support multiple names');
+
+var name = name[0];
+
+console.log();
+console.log('creating new reapp folder for: %s...', name);
+
+var url = 'git://github.com/reapp/reapp-starter.git';
+var dest = process.cwd() + '/' + name;
+var opts = {
+  bare: true
+};
+
+if (fs.existsSync(dest))
+  console.log('error! location already exists');
+else
+  start();
+
+function start() {
+  cloneRepo()
+    .then(deleteGitFolder)
+    .then(initGit)
+    .then(updateName)
+    .then(npmInstall)
+    .then(finish);
 }
 
-console.log();
-console.log('creating reapp: %s...', name[0]);
+function cloneRepo() {
+  return clone(url, dest, opts);
+}
 
-//
+function deleteGitFolder() {
+  return new Promise(function(resolve, reject) {
+    rimraf(dest + '/.git', function(err, data) {
+      if (err) return reject(err);
+      resolve(data);
+    })
+  });
+}
 
-console.log();
+function initGit() {
+  return Repository.init(dest + '/.git', 0);
+}
+
+function updateName() {
+  return new Promise(function(resolve, reject) {
+    replace({
+      regex: '{{reappName}}',
+      replacement: name,
+      paths: [dest],
+      recursive: true,
+      silent: true
+    });
+
+    resolve();
+  });
+}
+
+function npmInstall() {
+  return new Promise(function(resolve, reject) {
+    process.chdir(dest);
+
+    var exec = require('child_process').exec, child;
+    child = exec('npm install', function(error, stdout, stderr) {
+      if (error) reject(error);
+      console.log(stdout);
+      console.log(stderr);
+    });
+  });
+}
+
+function finish() {
+  console.log('ok');
+  console.log();
+}
