@@ -8,11 +8,13 @@ var makeBuildDir = require('./lib/makeBuildDir');
 Program
   .option('-d, --debug', 'output extra information for debugging')
   .option('-c, --config <path>', 'provide a config [path] for webpack')
+  .option('--nolink', 'dont link webpack modules to ./server_modules')
   .parse(process.argv);
 
 var opts = {
   dir: process.cwd(),
-  debug: !!Program.debug
+  debug: !!Program.debug,
+  linkModules: !Program.nolink
 };
 
 makeBuildDir(opts.dir, run);

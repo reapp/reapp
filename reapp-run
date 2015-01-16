@@ -2,8 +2,8 @@
 
 var Program = require('commander');
 var server = require('reapp-server');
-var reappWebpack = require('reapp-webpack-config');
-var runConfig = require('reapp-webpack-config/config/webpack.run.js');
+var Pack = require('reapp-pack');
+var runConfig = require('reapp-pack/config/webpack.run.js');
 
 Program
   .option('-c, --config', 'provide a webpack config, defaults to using reapp-webpack-config')
@@ -24,22 +24,19 @@ var opts = {
   debug: !!Program.debug,
   port: Number(Program.port),
   wport: Number(Program.port) + 1,
-  linkModules: !Program.nolink
+  linkModules: !Program.nolink,
+  hot: true
 };
-
-if (!opts.config)
-  opts.config = reappWebpack.makeConfig(runConfig, opts);
-else
-  opts.config = require(opts.config);
-
-// var STYLE_URL = 'main.css?' + stats.hash;
-// var SCRIPT_URL = [].concat(stats.assetsByChunkName.main)[0] + '?' + stats.hash;
 
 if (Program.debug) {
   console.log('CLI received opts:');
-  console.dir(opts);
+  console.dir(opts, { depth: 10 });
   console.log();
 }
+
+opts.config = opts.config ?
+  require(opts.config) :
+  Pack.makeConfig(runConfig, opts);
 
 // run server
 server(opts);
