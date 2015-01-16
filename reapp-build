@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 
 var Program = require('commander');
-var server = require('reapp-server');
-var build = require('reapp-build');
+var Server = require('reapp-build');
 
 Program
   .option('-d, --debug', 'output extra information for debugging')
   .option('-e, --entry <path>', 'provide an entry [path] for your app', './app/app')
   .option('-m, --mode <mode>', 'run in a [mode] using a webpack config file', 'development')
-  .option('-p, --port <number>', 'specify a port [number]', parseInt)
   .parse(process.argv);
 
 var dir = process.cwd();
@@ -20,13 +18,8 @@ var serverOpts = {
   dir: dir,
   mode: Program.mode,
   entry: Program.entry,
-  debug: !!Program.debug,
-  port: Program.port,
-  hot: true
+  debug: !!Program.debug
 };
-
-// var STYLE_URL = 'main.css?' + stats.hash;
-// var SCRIPT_URL = [].concat(stats.assetsByChunkName.main)[0] + '?' + stats.hash;
 
 if (Program.debug) {
   console.log('CLI received opts:');
@@ -34,8 +27,4 @@ if (Program.debug) {
   console.log();
 }
 
-// build bundle
-serverOpts.webpackConfig = build(opts);
-
-// run server
-Server(serverOpts);
+Build(serverOpts);
