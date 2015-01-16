@@ -9,6 +9,7 @@ var Program = require('commander');
 Program
   .version(require('./package.json').version)
   .command('new [name]', 'creates a directory with a new reapp base installed')
-  .command('run', 'runs a reapp application');
+  .command('run', 'runs a reapp application')
+  .command('build', 'builds a reapp application to a bundle');
 
 Program.parse(process.argv);

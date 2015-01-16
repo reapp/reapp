@@ -3,28 +3,34 @@
 var Program = require('commander');
 var server = require('reapp-server');
 var makeWebpackConfig = require('reapp-webpack-config');
+var runConfig = require('reapp-webpack-config/config/webpack.run.js');
 
 Program
   .option('-c, --config', 'provide a webpack config, defaults to using reapp-webpack-config')
   .option('-d, --debug', 'output extra information for debugging')
-  .option('-e, --entry [path]', 'provide an entry [path] for your app', './app/app')
+  .option('--nolink', 'dont link webpack modules to ./server_modules')
   .option('-p, --port [number]', 'specify a port [number]', 5283)
   .parse(process.argv);
 
 var dir = process.cwd();
 
-if (Program.entry.indexOf('./') === 0)
-  Program.entry = dir + Program.entry.slice(1);
+// relative path for config
+if (Program.config && Program.config.indexOf('./') === 0)
+  Program.config = dir + Program.config.slice(1);
 
 var opts = {
   dir: dir,
-  mode: Program.mode || 'development',
-  entry: Program.entry,
+  config: Program.config,
   debug: !!Program.debug,
   port: Number(Program.port),
   wport: Number(Program.port) + 1,
-  hot: true
+  linkModules: !Program.nolink
 };
+
+if (!opts.config)
+  opts.config = makeWebpackConfig(runConfig, opts);
+else
+  opts.config = require(opts.config);
 
 // var STYLE_URL = 'main.css?' + stats.hash;
 // var SCRIPT_URL = [].concat(stats.assetsByChunkName.main)[0] + '?' + stats.hash;
@@ -34,11 +40,6 @@ if (Program.debug) {
   console.dir(opts);
   console.log();
 }
-
-// build bundle
-opts.config = Program.config ?
-  require(Program.config) :
-  makeWebpackConfig(opts);
 
 // run server
 server(opts);

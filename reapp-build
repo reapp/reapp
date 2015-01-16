@@ -1,23 +1,25 @@
 #!/usr/bin/env node
 
 var Program = require('commander');
-var Server = require('reapp-build');
+var makeBuildDir = require('./lib/makeBuildDir');
+var makeWebpackConfig = require('reapp-webpack-config');
 
 Program
   .option('-d, --debug', 'output extra information for debugging')
-  .option('-e, --entry <path>', 'provide an entry [path] for your app', './app/app')
-  .option('-m, --mode <mode>', 'run in a [mode] using a webpack config file', 'development')
+  .option('-c, --config <path>', 'provide a config [path] for webpack')
   .parse(process.argv);
 
 var dir = process.cwd();
 
-if (Program.entry.indexOf('./') === 0)
-  Program.entry = dir + Program.entry.slice(1);
+makeBuildDir(dir);
+
+// relative path for config
+if (Program.config.indexOf('./') === 0)
+  Program.config = dir + Program.config.slice(1);
 
 var serverOpts = {
   dir: dir,
-  mode: Program.mode,
-  entry: Program.entry,
+  config: Program.config,
   debug: !!Program.debug
 };
 
