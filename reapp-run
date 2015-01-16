@@ -2,13 +2,13 @@
 
 var Program = require('commander');
 var server = require('reapp-server');
-var build = require('reapp-build');
+var makeWebpackConfig = require('reapp-webpack-config');
 
 Program
+  .option('-c, --config', 'provide a webpack config, defaults to using reapp-webpack-config')
   .option('-d, --debug', 'output extra information for debugging')
-  .option('-e, --entry <path>', 'provide an entry [path] for your app', './app/app')
-  .option('-m, --mode <mode>', 'run in a [mode] using a webpack config file', 'development')
-  .option('-p, --port <number>', 'specify a port [number]', parseInt)
+  .option('-e, --entry [path]', 'provide an entry [path] for your app', './app/app')
+  .option('-p, --port [number]', 'specify a port [number]', 5283)
   .parse(process.argv);
 
 var dir = process.cwd();
@@ -16,12 +16,13 @@ var dir = process.cwd();
 if (Program.entry.indexOf('./') === 0)
   Program.entry = dir + Program.entry.slice(1);
 
-var serverOpts = {
+var opts = {
   dir: dir,
-  mode: Program.mode,
+  mode: Program.mode || 'development',
   entry: Program.entry,
   debug: !!Program.debug,
-  port: Program.port,
+  port: Number(Program.port),
+  wport: Number(Program.port) + 1,
   hot: true
 };
 
@@ -30,12 +31,14 @@ var serverOpts = {
 
 if (Program.debug) {
   console.log('CLI received opts:');
-  console.dir(serverOpts);
+  console.dir(opts);
   console.log();
 }
 
 // build bundle
-serverOpts.webpackConfig = build(opts);
+opts.config = Program.config ?
+  require(Program.config) :
+  makeWebpackConfig(opts);
 
 // run server
-Server(serverOpts);
+server(opts);
