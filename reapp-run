@@ -2,7 +2,7 @@
 
 var Program = require('commander');
 var server = require('reapp-server');
-var makeWebpackConfig = require('reapp-webpack-config');
+var reappWebpack = require('reapp-webpack-config');
 var runConfig = require('reapp-webpack-config/config/webpack.run.js');
 
 Program
@@ -28,7 +28,7 @@ var opts = {
 };
 
 if (!opts.config)
-  opts.config = makeWebpackConfig(runConfig, opts);
+  opts.config = reappWebpack.makeConfig(runConfig, opts);
 else
   opts.config = require(opts.config);
 

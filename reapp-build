@@ -1,32 +1,35 @@
 #!/usr/bin/env node
 
 var Program = require('commander');
+var Pack = require('reapp-pack');
+var buildConfig = require('reapp-pack/config/webpack.build.js');
 var makeBuildDir = require('./lib/makeBuildDir');
-var makeWebpackConfig = require('reapp-webpack-config');
 
 Program
   .option('-d, --debug', 'output extra information for debugging')
   .option('-c, --config <path>', 'provide a config [path] for webpack')
   .parse(process.argv);
 
-var dir = process.cwd();
-
-makeBuildDir(dir);
-
-// relative path for config
-if (Program.config.indexOf('./') === 0)
-  Program.config = dir + Program.config.slice(1);
-
-var serverOpts = {
-  dir: dir,
-  config: Program.config,
+var opts = {
+  dir: process.cwd(),
   debug: !!Program.debug
 };
 
-if (Program.debug) {
+makeBuildDir(opts.dir, run);
+
+// relative path for config
+if (Program.config && Program.config.indexOf('./') === 0)
+  Program.config = opts.dir + Program.config.slice(1);
+
+if (!Program.config)
+  Program.config = Pack.makeConfig(buildConfig, opts);
+
+if (opts.debug) {
   console.log('CLI received opts:');
-  console.dir(serverOpts);
+  console.dir(opts);
   console.log();
 }
 
-Build(serverOpts);
+function run() {
+  Pack.webpack(Program.config, opts);
+}

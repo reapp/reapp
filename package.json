@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/reapp/reapp",
   "dependencies": {
-    "reapp-webpack-config": "1.0.0",
+    "reapp-pack": "1.0.0",
     "commander": "~2.5.1",
     "reapp-server": "*",
     "nodegit": "~0.2.4",
