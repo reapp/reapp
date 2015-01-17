@@ -4,6 +4,7 @@ var Program = require('commander');
 var server = require('reapp-server');
 var Pack = require('reapp-pack');
 var runConfig = require('reapp-pack/config/webpack.run.js');
+var checkIsReapp = require('./lib/checkIsReapp');
 
 Program
   .option('-c, --config', 'provide a webpack config, defaults to using reapp-webpack-config')
@@ -13,6 +14,8 @@ Program
   .parse(process.argv);
 
 var dir = process.cwd();
+
+checkIsReapp(dir);
 
 // relative path for config
 if (Program.config && Program.config.indexOf('./') === 0)
