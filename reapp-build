@@ -2,9 +2,11 @@
 
 var Program = require('commander');
 var Pack = require('reapp-pack');
+var util = require('util');
 var buildConfig = require('reapp-pack/config/webpack.build.js');
 var makeBuildDir = require('./lib/makeBuildDir');
 var checkIsReapp = require('./lib/checkIsReapp');
+var resolveAppPath = require('./lib/resolveAppPath');
 
 Program
   .option('-d, --debug', 'output extra information for debugging')
@@ -18,25 +20,23 @@ var opts = {
   linkModules: !Program.nolink
 };
 
-checkIsReapp(opts.dir);
-makeBuildDir(opts.dir, run);
-
-// relative path for config
-if (Program.config && Program.config.indexOf('./') === 0)
-  Program.config = opts.dir + Program.config.slice(1);
-
-if (!Program.config)
-  Program.config = Pack.makeConfig(buildConfig, opts);
-
-console.log('Building app...');
-console.log();
-
 if (opts.debug) {
   console.log('CLI received opts:');
   console.dir(opts);
   console.log();
 }
 
+var config = resolveAppPath(opts.dir, Program.config);
+
+// make config based on buildConfig if not provided
+if (!config)
+  config = Pack.makeConfig(buildConfig, opts);
+
+checkIsReapp(opts.dir);
+makeBuildDir(opts.dir, run);
+
+console.log('Building app...', "\n");
+
 function run() {
-  Pack.webpack(Program.config, opts);
+  Pack.webpack(config);
 }

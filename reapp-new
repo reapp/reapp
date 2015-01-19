@@ -42,7 +42,7 @@ function start() {
   cloneRepo()
     .then(deleteGitFolder)
     .then(initGit)
-    .then(updateName)
+    .then(replaceGivenNameInApp)
     .then(npmInstall)
     .then(finish);
 }
@@ -64,7 +64,7 @@ function initGit() {
   return Repository.init(dest + '/.git', 0);
 }
 
-function updateName() {
+function replaceGivenNameInApp() {
   return new Promise(function(resolve, reject) {
     replace({
       regex: '{{reappName}}',

@@ -5,6 +5,7 @@ var server = require('reapp-server');
 var Pack = require('reapp-pack');
 var runConfig = require('reapp-pack/config/webpack.run.js');
 var checkIsReapp = require('./lib/checkIsReapp');
+var resolveAppPath = require('./lib/resolveAppPath');
 
 Program
   .option('-c, --config', 'provide a webpack config, defaults to using reapp-webpack-config')
@@ -17,13 +18,9 @@ var dir = process.cwd();
 
 checkIsReapp(dir);
 
-// relative path for config
-if (Program.config && Program.config.indexOf('./') === 0)
-  Program.config = dir + Program.config.slice(1);
-
 var opts = {
   dir: dir,
-  config: Program.config,
+  config: resolveAppPath(dir, Program.config),
   debug: !!Program.debug,
   port: Number(Program.port),
   wport: Number(Program.port) + 1,
