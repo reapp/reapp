@@ -48,12 +48,12 @@ function run() {
 
       if (statsObj.warnings.length) {
         console.log('Had warnings:'.yellow.bold);
-        console.log(prettyArr(statsObj.warnings));
+        console.log(prettyArr(statsObj.warnings), "\n\n");
       }
 
       if (statsObj.errors.length) {
         console.log('Had errors:'.red.bold);
-        console.log(prettyArr(statsObj.errors));
+        console.log(prettyArr(statsObj.errors), "\n\n");
       }
 
       console.log('Build complete'.green.bold);
@@ -72,6 +72,7 @@ function prettyArr(arr) {
     if (Array.isArray(item))
       prettyArr(item);
 
-    console.log(item, newLines);
+    if (item)
+      console.log(item, newLines);
   });
 }
