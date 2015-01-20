@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
+var Program = require('commander');
+
 if (process.argv.length === 2) {
   process.argv.push('--help');
 }
-
-var Program = require('commander');
 
 Program
   .version(require('./package.json').version)

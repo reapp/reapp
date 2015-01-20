@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var Program = require('commander');
+var colors = require('colors');
 var server = require('reapp-server');
 var Pack = require('reapp-pack');
 var runConfig = require('reapp-pack/config/webpack.run.js');
@@ -29,7 +30,7 @@ var opts = {
 };
 
 if (Program.debug) {
-  console.log('CLI received opts:');
+  console.log('CLI received opts:'.blue);
   console.dir(opts, { depth: 10 });
   console.log();
 }

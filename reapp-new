@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var Program = require('commander');
+var colors = require('colors');
 var fs = require('fs');
 var NodeGit = require('nodegit');
 var Repository = NodeGit.Repository;
@@ -15,17 +16,19 @@ Program
 var name = Program.args;
 
 if (!name.length) {
-  console.error('must give a name after "new" (ex: reapp new myname)');
+  console.log('must give a name after "new" (ex: reapp new myname)'.red);
   process.exit(1);
 }
 
-if (name.length > 1)
-  console.error('sorry, we don\'t support multiple names');
+if (name.length > 1) {
+  console.log('sorry, we don\'t support multiple names'.red);
+  process.exit(1);
+}
 
 var name = name[0];
 
 console.log();
-console.log('creating new reapp folder for: %s...', name);
+console.log('Creating new reapp folder for: %s...'.green, name);
 
 var url = 'git://github.com/reapp/reapp-starter.git';
 var dest = process.cwd() + '/' + name;
@@ -34,7 +37,7 @@ var opts = {
 };
 
 if (fs.existsSync(dest))
-  console.log('error! location already exists');
+  console.log('Error! This directory already exists'.red);
 else
   start();
 
@@ -92,6 +95,6 @@ function npmInstall() {
 }
 
 function finish() {
-  console.log('ok');
+  console.log('Done!'.green.bold);
   console.log();
 }

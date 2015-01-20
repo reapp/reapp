@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var Program = require('commander');
+var colors = require('colors');
 var Pack = require('reapp-pack');
 var util = require('util');
 var buildConfig = require('reapp-pack/config/webpack.build.js');
@@ -22,7 +23,7 @@ var opts = {
 };
 
 if (opts.debug) {
-  console.log('CLI received opts:');
+  console.log('CLI received opts:'.blue);
   console.dir(opts);
   console.log();
 }
@@ -35,16 +36,42 @@ checkIsReapp(opts.dir);
 makeBuildDir(opts.dir, run);
 
 function run() {
-  console.log('Building...', "\n");
+  console.log('Building...'.yellow, "\n");
+
   Pack.webpack(config, function(err, stats) {
-    if (err)
-      console.error(err);
+    if (err) {
+      console.log('Error:');
+      console.log(err);
+    }
     else {
-      console.log('Build complete');
+      var statsObj = stats.toJson({ errorDetails: true });
+
+      if (statsObj.warnings.length) {
+        console.log('Had warnings:'.yellow.bold);
+        console.log(prettyArr(statsObj.warnings));
+      }
+
+      if (statsObj.errors.length) {
+        console.log('Had errors:'.red.bold);
+        console.log(prettyArr(statsObj.errors));
+      }
+
+      console.log('Build complete'.green.bold);
 
       if (opts.debug) {
-        console.log('view stats at ./build/stats.json');
+        console.log('Stats built to ./build/stats.json'.blue);
       }
     }
+  });
+}
+
+function prettyArr(arr) {
+  var newLines = "\n\n";
+
+  arr.forEach(function(item) {
+    if (Array.isArray(item))
+      prettyArr(item);
+
+    console.log(item, newLines);
   });
 }

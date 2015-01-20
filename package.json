@@ -23,6 +23,7 @@
     "reapp-server": "*",
     "nodegit": "~0.2.4",
     "rimraf": "~2.2.8",
-    "replace": "~0.3.0"
+    "replace": "~0.3.0",
+    "colors": "~1.0.3"
   }
 }
