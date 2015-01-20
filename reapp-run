@@ -20,7 +20,7 @@ checkIsReapp(dir);
 
 var opts = {
   dir: dir,
-  config: resolveAppPath(dir, Program.config),
+  config: Program.config && resolveAppPath(dir, Program.config),
   debug: !!Program.debug,
   port: Number(Program.port),
   wport: Number(Program.port) + 1,
@@ -34,7 +34,7 @@ if (Program.debug) {
   console.log();
 }
 
-opts.config = opts.config ?
+opts.config = Program.config ?
   require(opts.config) :
   Pack.makeConfig(runConfig, opts);
 
