@@ -39,7 +39,12 @@ function run() {
   Pack.webpack(config, function(err, stats) {
     if (err)
       console.error(err);
-    else if (opts.debug)
-      console.log(stats);
+    else {
+      console.log('Build complete');
+
+      if (opts.debug) {
+        console.log('view stats at ./build/stats.json');
+      }
+    }
   });
 }
