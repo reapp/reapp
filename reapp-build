@@ -5,41 +5,36 @@ var colors = require('colors');
 var pack = require('reapp-pack');
 var webpack = require('reapp-pack/webpack');
 var webpackCallback = require('reapp-pack/lib/callback');
-var buildConfig = require('reapp-pack/config/webpack.build.js');
 var makeBuildDir = require('./lib/makeBuildDir');
 var checkIsReapp = require('./lib/checkIsReapp');
-var resolveAppPath = require('./lib/resolveAppPath');
 
 Program
   .option('-d, --debug', 'output extra information for debugging')
-  .option('-c, --config <path>', 'provide a config [path] for webpack')
-  .option('--nolink', 'dont link webpack modules to ./server_modules')
   .parse(process.argv);
 
 var dir = process.cwd();
 
-var opts = {
-  config: resolveAppPath(dir, Program.config),
-  dir: dir,
-  debug: !!Program.debug,
-  linkModules: !Program.nolink
-};
-
-if (opts.debug) {
+if (Program.debug) {
   console.log('CLI received opts:'.blue);
-  console.dir(opts);
+  console.log(Program);
   console.log();
 }
 
-checkIsReapp(opts.dir);
-makeBuildDir(opts.dir, run);
+checkIsReapp(dir);
 
-var config = Program.config ?
-  require(opts.config) :
-  pack(buildConfig, opts);
+// generate config
+var buildConfig = require('reapp-pack/config/build.js');
+var config = buildConfig({
+  dir: dir,
+  linkModules: true,
+  debug: Program.debug
+});
+
+makeBuildDir(dir, run);
 
 function run() {
   console.log('Building...'.yellow, "\n");
-
-  webpack(config, webpackCallback);
+  webpack(config, webpackCallback({
+    debug: Program.debug
+  }));
 }
