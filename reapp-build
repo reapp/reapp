@@ -3,10 +3,12 @@
 var Program = require('commander');
 var colors = require('colors');
 var pack = require('reapp-pack');
+var makeLayout = require('reapp-pack/lib/makeLayout');
 var webpack = require('reapp-pack/webpack');
 var webpackCallback = require('reapp-pack/lib/callback');
 var makeBuildDir = require('./lib/makeBuildDir');
 var checkIsReapp = require('./lib/checkIsReapp');
+var fs = require('fs');
 
 Program
   .option('-d, --debug', 'output extra information for debugging')
@@ -29,6 +31,18 @@ var config = buildConfig({
   linkModules: true,
   debug: Program.debug
 });
+
+// html template
+var layoutIn = dir + '/assets/layout.html';
+var layoutOut = config.output.path + '/layout.html';
+
+var layout = makeLayout({
+  template: layoutIn,
+  port: 3010,
+  scripts: Object.keys(config.entry)
+});
+
+fs.writeFileSync(layoutOut, layout);
 
 makeBuildDir(dir, run);
 
