@@ -4,7 +4,7 @@ var Program = require('commander');
 var colors = require('colors');
 var pack = require('reapp-pack');
 var webpack = require('reapp-pack/webpack');
-var util = require('util');
+var webpackCallback = require('reapp-pack/lib/callback');
 var buildConfig = require('reapp-pack/config/webpack.build.js');
 var makeBuildDir = require('./lib/makeBuildDir');
 var checkIsReapp = require('./lib/checkIsReapp');
@@ -41,41 +41,5 @@ var config = Program.config ?
 function run() {
   console.log('Building...'.yellow, "\n");
 
-  webpack(config, function(err, stats) {
-    if (err) {
-      console.log('Error:');
-      console.log(err);
-    }
-    else {
-      var statsObj = stats.toJson({ errorDetails: true });
-
-      if (statsObj.warnings.length) {
-        console.log('Had warnings:'.yellow.bold);
-        console.log(prettyArr(statsObj.warnings), "\n\n");
-      }
-
-      if (statsObj.errors.length) {
-        console.log('Had errors:'.red.bold);
-        console.log(prettyArr(statsObj.errors), "\n\n");
-      }
-
-      console.log('Build complete'.green.bold);
-
-      if (opts.debug) {
-        console.log('Stats built to ./build/stats.json'.blue);
-      }
-    }
-  });
-}
-
-function prettyArr(arr) {
-  var newLines = "\n\n";
-
-  arr.forEach(function(item) {
-    if (Array.isArray(item))
-      prettyArr(item);
-
-    if (item)
-      console.log(item, newLines);
-  });
+  webpack(config, webpackCallback);
 }

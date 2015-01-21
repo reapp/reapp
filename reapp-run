@@ -4,40 +4,49 @@ var Program = require('commander');
 var colors = require('colors');
 var server = require('reapp-server');
 var pack = require('reapp-pack');
-var runConfig = require('reapp-pack/config/webpack.run.js');
+var webpackServer = require('reapp-pack/webpackServer');
 var checkIsReapp = require('./lib/checkIsReapp');
-var resolveAppPath = require('./lib/resolveAppPath');
-
-Program
-  .option('-c, --config', 'provide a webpack config, defaults to using reapp-webpack-config')
-  .option('-d, --debug', 'output extra information for debugging')
-  .option('--nolink', 'dont link webpack modules to ./server_modules')
-  .option('-p, --port [number]', 'specify a port [number]', 5283)
-  .parse(process.argv);
 
 var dir = process.cwd();
-
 checkIsReapp(dir);
 
-var opts = {
-  dir: dir,
-  config: resolveAppPath(dir, Program.config),
-  debug: !!Program.debug,
-  port: Number(Program.port),
-  wport: Number(Program.port) + 1,
-  linkModules: !Program.nolink,
-  hot: true
-};
+Program
+  .option('-d, --debug', 'output extra information for debugging')
+  .option('-p, --port [number]', 'specify a port [number]', 3010)
+  .parse(process.argv);
 
+// webpack port is next one up
+var wport = Program.port + 1;
+
+// generate config
+var runConfig = require('reapp-pack/config/webpack.run.js');
+var config = runConfig({
+  dir: dir,
+  port: wport,
+  linkModules: true
+});
+
+// debug
 if (Program.debug) {
   console.log('CLI received opts:'.blue.bold);
-  console.dir(opts, { depth: 10 });
+  console.log(Program);
   console.log();
 }
 
-opts.config = Program.config ?
-  require(opts.config) :
-  pack(runConfig, opts);
+// express
+server({
+  dir: dir,
+  scripts: Object.keys(config.entry),
+  layout: dir + '/assets/layout.html',
+  debug: Program.debug,
+  port: Program.port,
+  wport: wport
+});
 
-// run server
-server(opts);
+// webpack-dev-server
+webpackServer(config, {
+  dir: dir,
+  hot: true,
+  debug: Program.debug,
+  port: wport
+});
