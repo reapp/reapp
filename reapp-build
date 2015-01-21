@@ -2,7 +2,8 @@
 
 var Program = require('commander');
 var colors = require('colors');
-var Pack = require('reapp-pack');
+var pack = require('reapp-pack');
+var webpack = require('reapp-pack/webpack');
 var util = require('util');
 var buildConfig = require('reapp-pack/config/webpack.build.js');
 var makeBuildDir = require('./lib/makeBuildDir');
@@ -15,9 +16,11 @@ Program
   .option('--nolink', 'dont link webpack modules to ./server_modules')
   .parse(process.argv);
 
+var dir = process.cwd();
+
 var opts = {
-  config: Program.config && resolveAppPath(opts.dir, Program.config),
-  dir: process.cwd(),
+  config: resolveAppPath(dir, Program.config),
+  dir: dir,
   debug: !!Program.debug,
   linkModules: !Program.nolink
 };
@@ -28,17 +31,17 @@ if (opts.debug) {
   console.log();
 }
 
-var config = Program.config ?
-  require(opts.config) :
-  Pack.makeConfig(buildConfig, opts);
-
 checkIsReapp(opts.dir);
 makeBuildDir(opts.dir, run);
+
+var config = Program.config ?
+  require(opts.config) :
+  pack(buildConfig, opts);
 
 function run() {
   console.log('Building...'.yellow, "\n");
 
-  Pack.webpack(config, function(err, stats) {
+  webpack(config, function(err, stats) {
     if (err) {
       console.log('Error:');
       console.log(err);

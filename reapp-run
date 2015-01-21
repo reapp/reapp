@@ -3,7 +3,7 @@
 var Program = require('commander');
 var colors = require('colors');
 var server = require('reapp-server');
-var Pack = require('reapp-pack');
+var pack = require('reapp-pack');
 var runConfig = require('reapp-pack/config/webpack.run.js');
 var checkIsReapp = require('./lib/checkIsReapp');
 var resolveAppPath = require('./lib/resolveAppPath');
@@ -21,7 +21,7 @@ checkIsReapp(dir);
 
 var opts = {
   dir: dir,
-  config: Program.config && resolveAppPath(dir, Program.config),
+  config: resolveAppPath(dir, Program.config),
   debug: !!Program.debug,
   port: Number(Program.port),
   wport: Number(Program.port) + 1,
@@ -30,14 +30,14 @@ var opts = {
 };
 
 if (Program.debug) {
-  console.log('CLI received opts:'.blue);
+  console.log('CLI received opts:'.blue.bold);
   console.dir(opts, { depth: 10 });
   console.log();
 }
 
 opts.config = Program.config ?
   require(opts.config) :
-  Pack.makeConfig(runConfig, opts);
+  pack(runConfig, opts);
 
 // run server
 server(opts);
