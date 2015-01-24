@@ -29,8 +29,8 @@ The CLI has two main functions that it helps you with. The first is creating new
 For now, it simple makes a bare clone of a repo we keep updated with the current best-practice.
 The goal is eventually to have a variety of baseline repo's to choose from.
 
-It also lets you run your app, using [reapp-server](https://github.com/reapp/reapp-server).
-reapp-server is a simple express server and webpack server that are designed to give you a modern JS stack.
+It also lets you run your app, using [reapp-server](https://github.com/reapp/reapp-server),
+a simple express server that works well with the default app structure.
 
 ### App Structure
 
@@ -43,8 +43,15 @@ It's very simple for now:
   /theme
   app.js
   routes.js
+/assets
+  layout.html
 /config (optional)
 ```
+
+`./app/app.js` is your entry point. Everything in the app folder should be pretty
+self-explanatory. `./assets` contains static assets, with a `layout.html` that is used
+to serve your app within. In general, you should't have to touch the layout, even for
+adding styles.
 
 If you place a build.webpack.js or run.webpack.js in your config folder, the reapp CLI
 will use these configs instead of the pre-made ones. To see more on the default configs,
@@ -52,25 +59,18 @@ check out the files in `./config` the [reapp-pack repo](https://github.com/reapp
 
 ### Roadmap
 
-Our initial goals are simple: focus on completeness and performance.
-Followed by a complete theme for Android.
+Our initial goals are simple: focus on completeness, consistency, and performance.
+Also, a theme for Android.
 
 Down the road we'd like to achieve the following:
 
--
-**Isomorphic** - Render first on server, pass data over
+- **Isomorphic** - Render first on server, pass data over
 to client to continue from there (easily achievable).
-
-  -
-**Responsive** - Support for tablet style interfaces
+- **Responsive** - Support for tablet style interfaces
 and JS-powered responsive styling.
-
-  -
-**Physics** - A spring based physics library
+- **Physics** - A spring based physics library
 into the animation library with an easy syntax.
-
-  -
-**Interaction** - A simple, declarative interaction
+- **Interaction** - A simple, declarative interaction
 library that can be composed well with reapp
 
 ### Platform
