@@ -1,13 +1,93 @@
-This is the repo for the reapp CLI. The CLI is used mainly for getting started
-on projects and is really lightweight.
+*reapp is just launching in alpha. These docs are far from complete and subject to change!*
 
-If you're looking for information on reapp, visit [reapp.io](http://reapp.io), or
-view the code in [one of our repositories](https://github.com/reapp).
+### Installation
 
-### Usage
+Installation is done through npm, though you can pick and choose any pieces you'd like
+and roll your own stack. To get the reapp CLI:
+
+```
+npm install -g reapp
+```
+
+Once that's done you can generate a new base reapp stack with:
+
+```
+reapp new [name]
+```
+
+Where [name] is the name you'd like to give your new stack.
+
+#### What does this give you?
+
+reapp new is actually a simple wrapper that clones a bare repository that we've set up
+to use the various reapp pieces optimally. We are working on having a few different
+setups, from simple to advanced, that you can choose from when generating your app.
+
+### CLI
+
+The CLI has two main functions that it helps you with. The first is creating new apps.
+For now, it simple makes a bare clone of a repo we keep updated with the current best-practice.
+The goal is eventually to have a variety of baseline repo's to choose from.
+
+It also lets you run your app, using [reapp-server](https://github.com/reapp/reapp-server).
+reapp-server is a simple express server and webpack server that are designed to give you a modern JS stack.
+
+### App Structure
+
+You can see the exact app that's generated through the [reapp-starter repo](https://github.com/reapp/reapp-starter).
+It's very simple for now:
+
+```
+/app
+  /components
+  /theme
+  app.js
+  routes.js
+/config (optional)
+```
+
+If you place a build.webpack.js or run.webpack.js in your config folder, the reapp CLI
+will use these configs instead of the pre-made ones. To see more on the default configs,
+check out the files in `./config` the [reapp-pack repo](https://github.com/reapp/reapp-pack).
+
+### Roadmap
+
+Our initial goals are simple: focus on completeness and performance.
+Followed by a complete theme for Android.
+
+Down the road we'd like to achieve the following:
+
+-
+**Isomorphic** - Render first on server, pass data over
+to client to continue from there (easily achievable).
+
+  -
+**Responsive** - Support for tablet style interfaces
+and JS-powered responsive styling.
+
+  -
+**Physics** - A spring based physics library
+into the animation library with an easy syntax.
+
+  -
+**Interaction** - A simple, declarative interaction
+library that can be composed well with reapp
+
+### Platform
 
 
-### Todo
-- adding platforms and building for them
+### Routes
 
-### MIT Licensed
+
+### UI
+
+
+### Development Environment
+
+Sublime users, some helpful plugins for you to install:
+
+- SublimeLinter
+- eshint
+- JavaScript Next - ES6 Syntax
+
+#### MIT License
