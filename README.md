@@ -74,6 +74,17 @@ If you place a build.webpack.js or run.webpack.js in your config folder, the rea
 will use these configs instead of the pre-made ones. To see more on the default configs,
 check out the files in `./config` the [reapp-pack repo](https://github.com/reapp/reapp-pack).
 
+### Included modules
+
+From here, you'll want to check the documentation on the included modules. Here
+they are:
+
+- [reapp-ui](https://github.com/reapp/reapp-ui)
+- [reapp-routes](https://github.com/reapp/reapp-routes)
+- [reapp-platform](https://github.com/reapp/reapp-platform)
+- [reapp-component](https://github.com/reapp/reapp-component)
+- [reapp-request](https://github.com/reapp/reapp-request)
+
 ### Roadmap
 
 Our initial goals are simple: focus on completeness, consistency, and performance.
@@ -89,14 +100,6 @@ and JS-powered responsive styling.
 into the animation library with an easy syntax.
 - **Interaction** - A simple, declarative interaction
 library that can be composed well with reapp
-
-### Platform
-
-
-### Routes
-
-
-### UI
 
 
 ### Development Environment
