@@ -32,6 +32,23 @@ The goal is eventually to have a variety of baseline repo's to choose from.
 It also lets you run your app, using [reapp-server](https://github.com/reapp/reapp-server),
 a simple express server that works well with the default app structure.
 
+CLI Usage:
+```
+Usage: reapp [options] [command]
+
+Commands:
+
+  new [name]  creates a directory with a new reapp-starter scaffold
+  run         runs a reapp application with express/webpack-dev-server
+  build       builds a reapp application to a bundle in ./build
+  help [cmd]  display help for [cmd]
+
+Options:
+
+  -h, --help     output usage information
+  -V, --version  output the version number
+```
+
 ### App Structure
 
 You can see the exact app that's generated through the [reapp-starter repo](https://github.com/reapp/reapp-starter).
