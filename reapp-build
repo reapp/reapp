@@ -34,7 +34,7 @@ var config = buildConfig({
 
 // html template
 var layoutIn = dir + '/assets/layout.html';
-var layoutOut = config.output.path + '/layout.html';
+var layoutOut = config.output.path + '/index.html';
 
 var layout = makeLayout({
   template: layoutIn,
@@ -42,8 +42,8 @@ var layout = makeLayout({
   scripts: Object.keys(config.entry)
 });
 
+// copy layout
 fs.writeFileSync(layoutOut, layout);
-
 makeBuildDir(dir, run);
 
 function run() {

@@ -72,11 +72,13 @@ adding styles.
 
 If you place a build.webpack.js or run.webpack.js in your config folder, the reapp CLI
 will use these configs instead of the pre-made ones. To see more on the default configs,
-check out the files in `./config` the [reapp-pack repo](https://github.com/reapp/reapp-pack).
+check out the files in the `./config` folder of the
+[reapp-pack repo](https://github.com/reapp/reapp-pack).
 
 ### Included modules
 
-From here, you'll want to check the documentation on the included modules. Here
+If you'd like to explore more deeply into how various pieces of reapp work together,
+you'll want to check the documentation on the included modules. Here
 they are:
 
 - [reapp-ui](https://github.com/reapp/reapp-ui)
