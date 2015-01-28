@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/reapp/reapp",
   "dependencies": {
-    "reapp-pack": "1.0.0",
-    "reapp-server": "*",
+    "reapp-pack": "^1.1.0",
+    "reapp-server": "^1.0.0",
     "commander": "~2.5.1",
     "nodegit": "~0.2.4",
     "rimraf": "~2.2.8",
