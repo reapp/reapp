@@ -92,17 +92,51 @@ will use these configs when you run `reapp build` or `reapp run`.
 To see some example configs, check out the files in the `./config` folder of the
 [reapp-pack repo](https://github.com/reapp/reapp-pack).
 
-### Packages
+### Your First App
 
-If you'd like to explore more deeply into how various pieces of reapp work together,
-you'll want to check the documentation on the included modules.
+There are a number of pieces we've included in a reapp. Let's explore a few
+of them in order of when you'll encounter them in your codebase. Think of this
+as a tour of a reapp app, giving an introduction to packages as we encounter them.
 
-Check out the [reapp project on Github](https://github.com/reapp) for more info. Here are some bigger packages,
-in order:
+You can check out the [reapp project on Github](https://github.com/reapp) for more info.
 
+To start, you'll want to open `./package.json`. Notice we have the following packages:
+- [reapp-routes](https://github.com/reapp/reapp-routes) (Routes generator)
 - [reapp-ui](https://github.com/reapp/reapp-ui) (UI Kit)
 - [reapp](https://github.com/reapp/reapp-ui) (CLI)
-- [reapp-routes](https://github.com/reapp/reapp-routes) (Routes generator)
+- [reapp-platform](https://github.com/reapp/reapp-platform) (Base utils)
+- [reapp-component](https://github.com/reapp/reapp-component) (DI and Factories)
+
+You also have an entry point defined as `app/app.js`. Lets start there.
+
+#### [reapp-routes](https://github.com/reapp/reapp-routes) (Routes generator)
+
+reapp-routes is a DRY nested route-to-directory mapping system. As long as
+your routes map to your component file structure, you can save lots of time
+and enforce consistency in your app, a win-win.
+
+Notice how the import looks for `reapp-routes/react-router`.
+The first import in app.js is your router. We love react-router, so we included
+a reapp-rotues generator for that by default, but you could write your own.
+
+You'll notice that the pre-defined routes all perfectly map to the structure of
+`./app/components`. To see more about how this works, check out reapp-routes.
+
+This is the reapp-routes syntax. The key to note here is the `require` that
+is passed to the routes function at the top level, which is how it dynamically
+requires your components based on the route tree.
+
+#### [reapp-ui](https://github.com/reapp/reapp-ui) (UI Kit)
+
+The next theme we require is the `./app/theme.js` file. reapp-ui has it's own
+documentation, but themes are the core of reapp-ui. They have three things they
+need: constants, styles, and animations. You can just use the included iOS theme,
+but we've included the `./app/theme` folder as an example of how you can easily
+customize themes.
+
+#### Other packages
+
+- [reapp](https://github.com/reapp/reapp-ui) (CLI)
 - [reapp-platform](https://github.com/reapp/reapp-platform) (Base utils)
 - [reapp-component](https://github.com/reapp/reapp-component) (DI and Factories)
 
