@@ -11,6 +11,7 @@ var checkIsReapp = require('./lib/checkIsReapp');
 var fs = require('fs');
 
 Program
+  .option('-w, --watch', 'watch for changes')
   .option('-d, --debug', 'output extra information for debugging')
   .parse(process.argv);
 
@@ -38,8 +39,8 @@ var layoutOut = config.output.path + '/index.html';
 
 var layout = makeLayout({
   template: layoutIn,
-  port: 3010,
-  scripts: Object.keys(config.entry)
+  scripts: Object.keys(config.entry),
+  styles: ['main.css']
 });
 
 // copy layout
@@ -48,7 +49,8 @@ makeBuildDir(dir, run);
 
 function run() {
   console.log('Building...'.yellow, "\n");
-  webpack(config, webpackCallback({
+
+  var compiler = webpack(config, webpackCallback({
     debug: Program.debug
   }));
 }
