@@ -9,6 +9,7 @@ var webpackCallback = require('reapp-pack/lib/callback');
 var makeBuildDir = require('./lib/makeBuildDir');
 var checkIsReapp = require('./lib/checkIsReapp');
 var fs = require('fs');
+var ncp = require('ncp');
 
 Program
   .option('-w, --watch', 'watch for changes')
@@ -43,9 +44,14 @@ var layout = makeLayout({
   styles: ['main.css']
 });
 
-// copy layout
-fs.writeFileSync(layoutOut, layout);
+// build dir
 makeBuildDir(dir, run);
+
+// copy layout
+fs.writeFile(layoutOut, layout);
+
+// copy icons
+ncp(dir + '/node_modules/reapp-ui/assets', dir + '/build/public/assets');
 
 function run() {
   console.log('Building...'.yellow, "\n");
