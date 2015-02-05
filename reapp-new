@@ -7,7 +7,6 @@ var NodeGit = require('nodegit');
 var Repository = NodeGit.Repository;
 var clone = NodeGit.Clone.clone;
 var rimraf = require('rimraf');
-var Promise = require('bluebird').Promise;
 var replace = require('replace');
 
 Program
