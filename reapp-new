@@ -8,6 +8,7 @@ var Repository = NodeGit.Repository;
 var clone = NodeGit.Clone.clone;
 var rimraf = require('rimraf');
 var replace = require('replace');
+var Promise = require('bluebird').Promise;
 
 Program
   .parse(process.argv);
@@ -63,11 +64,13 @@ function deleteGitFolder() {
 }
 
 function initGit() {
+  console.log('Initializing git...'.green);
   return Repository.init(dest + '/.git', 0);
 }
 
 function replaceGivenNameInApp() {
   return new Promise(function(resolve, reject) {
+    console.log('Inserting your name...'.green);
     replace({
       regex: '{{reappName}}',
       replacement: name,
@@ -82,6 +85,7 @@ function replaceGivenNameInApp() {
 
 function npmInstall() {
   return new Promise(function(resolve, reject) {
+    console.log('Running npm install...'.green);
     process.chdir(dest);
 
     var exec = require('child_process').exec, child;
