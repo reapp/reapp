@@ -47,8 +47,12 @@ function start() {
     .then(initGit)
     .then(replaceGivenNameInApp)
     .then(npmInstall)
-    .then(npmDedupe)
-    .then(finish);
+    // .then(npmDedupe)
+    .then(finish)
+    .catch(function(err) {
+      console.log("\n", 'Error'.bold.red);
+      console.log(err);
+    });
 }
 
 function cloneRepo() {

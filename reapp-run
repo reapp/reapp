@@ -5,6 +5,7 @@ var colors = require('colors');
 var server = require('reapp-server');
 var pack = require('reapp-pack');
 var makeLayout = require('reapp-pack/lib/makeLayout');
+var makeBuildDir = require('./lib/makeBuildDir');
 var webpackServer = require('reapp-pack/webpackServer');
 var checkIsReapp = require('./lib/checkIsReapp');
 
@@ -49,18 +50,23 @@ var layout = makeLayout({
   scripts: Object.keys(config.entry)
 });
 
-// express
-server({
-  dir: dir,
-  template: layout,
-  debug: Program.debug,
-  port: Program.port
-});
+// make build dir and run
+makeBuildDir(dir, run);
 
-// webpack-dev-server
-webpackServer(config, {
-  dir: dir,
-  hot: true,
-  debug: Program.debug,
-  port: wport
-});
+function run() {
+  // express
+  server({
+    dir: dir,
+    template: layout,
+    debug: Program.debug,
+    port: Program.port
+  });
+
+  // webpack-dev-server
+  webpackServer(config, {
+    dir: dir,
+    hot: true,
+    debug: Program.debug,
+    port: wport
+  });
+}
