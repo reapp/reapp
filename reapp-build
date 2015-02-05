@@ -27,10 +27,12 @@ if (Program.debug) {
 checkIsReapp(dir);
 
 // user config
-var config = require(dir + '/config/build.config.js');
+var config;
 
-// default config
-if (!config) {
+try {
+  config = require(dir + '/config/build.config.js');
+}
+catch(e) {
   var buildConfig = require('reapp-pack/config/build.js');
   config = buildConfig({
     dir: dir,
