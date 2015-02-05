@@ -26,13 +26,18 @@ if (Program.debug) {
 
 checkIsReapp(dir);
 
-// generate config
-var buildConfig = require('reapp-pack/config/build.js');
-var config = buildConfig({
-  dir: dir,
-  linkModules: true,
-  debug: Program.debug
-});
+// user config
+var config = require(dir + '/config/build.config.js');
+
+// default config
+if (!config) {
+  var buildConfig = require('reapp-pack/config/build.js');
+  config = buildConfig({
+    dir: dir,
+    linkModules: true,
+    debug: Program.debug
+  });
+}
 
 // html template
 var layoutIn = dir + '/assets/layout.html';

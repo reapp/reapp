@@ -27,14 +27,19 @@ checkIsReapp(dir);
 // webpack port is next one up
 var wport = Program.port + 1;
 
-// generate config
-var runConfig = require('reapp-pack/config/run.js');
-var config = runConfig({
-  dir: dir,
-  port: wport,
-  linkModules: true,
-  debug: Program.debug
-});
+// find config
+var config = require(dir + '/config/run.config.js');
+
+// default config
+if (!config) {
+  var runConfig = require('reapp-pack/config/run.js');
+  config = runConfig({
+    dir: dir,
+    port: wport,
+    linkModules: true,
+    debug: Program.debug
+  });
+}
 
 // html template
 var layout = makeLayout({
