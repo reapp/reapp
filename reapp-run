@@ -8,6 +8,7 @@ var makeLayout = require('reapp-pack/lib/makeLayout');
 var makeBuildDir = require('./lib/makeBuildDir');
 var webpackServer = require('reapp-pack/webpackServer');
 var checkIsReapp = require('./lib/checkIsReapp');
+var findConfig = require('./lib/findConfig');
 
 var dir = process.cwd();
 
@@ -29,19 +30,13 @@ checkIsReapp(dir);
 var wport = Program.port + 1;
 
 // config
-var config;
-try {
-  config = require(dir + '/config/run.config.js');
-}
-catch(e) {
-  var runConfig = require('reapp-pack/config/run.js');
-  config = runConfig({
-    dir: dir,
-    port: wport,
-    linkModules: true,
-    debug: Program.debug
-  });
-}
+var config = findConfig({
+  name: 'run',
+  dir: dir,
+  port: wport,
+  linkModules: true,
+  debug: Program.debug
+});
 
 // html template
 var layout = makeLayout({
