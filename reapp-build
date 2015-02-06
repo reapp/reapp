@@ -8,6 +8,7 @@ var webpack = require('reapp-pack/webpack');
 var webpackCallback = require('reapp-pack/lib/callback');
 var makeBuildDir = require('./lib/makeBuildDir');
 var checkIsReapp = require('./lib/checkIsReapp');
+var findConfig = require('./lib/findConfig');
 var fs = require('fs');
 var ncp = require('ncp');
 
