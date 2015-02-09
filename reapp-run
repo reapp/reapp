@@ -15,6 +15,7 @@ var dir = process.cwd();
 Program
   .option('-d, --debug', 'output extra information for debugging')
   .option('-p, --port [number]', 'specify a port [number]', 3010)
+  .option('-e, --env [env]', 'specify an enivornment', 'development')
   .parse(process.argv);
 
 // debug
@@ -35,7 +36,8 @@ var config = findConfig({
   dir: dir,
   port: wport,
   linkModules: true,
-  debug: Program.debug
+  debug: Program.debug,
+  env: Program.env
 });
 
 // html template

@@ -111,8 +111,10 @@ function npmDedupe() {
 function handleChildProcess(resolve, reject, error, stdout, stderr) {
   if (error)
     reject(error);
-  else if (stderr)
-    reject(stderr);
+  else if (stderr) {
+    console.log('Warnings:'.bold.yellow);
+    resolve(stderr);
+  }
   else
     resolve(stdout);
 }
