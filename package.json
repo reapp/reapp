@@ -28,5 +28,8 @@
     "reapp-server": "^1.0.1",
     "replace": "~0.3.0",
     "rimraf": "~2.2.8"
+  },
+  "bin": {
+    "reapp": "./reapp"
   }
 }
