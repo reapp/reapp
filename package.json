@@ -24,7 +24,7 @@
     "mkdirp": "^0.5.0",
     "ncp": "~1.0.1",
     "nodegit": "~0.2.4",
-    "reapp-pack": "^1.1.5",
+    "reapp-pack": "^1.1.9",
     "reapp-server": "^1.0.1",
     "replace": "~0.3.0",
     "rimraf": "~2.2.8"
