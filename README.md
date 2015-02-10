@@ -117,7 +117,7 @@ and enforce consistency in your app, a win-win.
 
 Notice how the import looks for `reapp-routes/react-router`.
 The first import in app.js is your router. We love react-router, so we included
-a reapp-rotues generator for that by default, but you could write your own.
+a reapp-routes generator for that by default, but you could write your own.
 
 You'll notice that the pre-defined routes all perfectly map to the structure of
 `./app/components`. To see more about how this works, check out reapp-routes.
@@ -144,13 +144,13 @@ customize themes.
 
 Reapp wasn't built purposefully to be a framework. Instead, it started
 as a UI kit. From that kit, two apps were built. While this isn't a lot,
-it was enough to see repitition between the two that could be extracted.
+it was enough to see repetition between the two that could be extracted.
 
 From those two apps, over a peried of months, we extracted a set of
 packages, ensuring to keep each of them completely independent. It was
 an experiment in seeing if a framework was necessary.
 
-What we found was this: if you can subscribe so a certain file structure,
+What we found was this: if you can subscribe to a certain file structure,
 you can avoid the framework. With that file structure, we can provide
 helpers via a CLI. Bootstrap your app in one command and you have a mature
 build system built in, without having to do anything.
