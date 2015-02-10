@@ -42,6 +42,7 @@ var config = findConfig({
 var layout = makeLayout({
   template: dir + '/assets/layout.html',
   port: wport,
+  hostname: config.hostname,
   scripts: Object.keys(config.entry)
 });
 
@@ -62,6 +63,7 @@ function run() {
     dir: dir,
     hot: true,
     debug: Program.debug,
+    hostname: config.hostname,
     port: wport
   });
 }
