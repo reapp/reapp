@@ -33,6 +33,7 @@
     "reapp": "./reapp",
     "reapp-new": "./reapp-new",
     "reapp-build": "./reapp-build",
-    "reapp-run": "./reapp-run"
+    "reapp-run": "./reapp-run",
+    "reapp-debug": "./reapp-debug"
   }
 }

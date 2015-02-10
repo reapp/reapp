@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+var colors = require('colors');
+var makeLayout = require('reapp-pack/lib/makeLayout');
+var findConfig = require('./lib/findConfig');
+var dir = process.cwd();
+
+require('./lib/checkIsReapp')(dir);
+
+console.log('Build config:'.yellow.bold, "\n");
+findConfig({
+  name: 'build',
+  dir: dir,
+  linkModules: true,
+  debug: true
+});
+console.log("\n", "\n");
+
+console.log('Run config:'.yellow.bold, "\n");
+var runConfig = findConfig({
+  name: 'run',
+  dir: dir,
+  port: 1000,
+  linkModules: true,
+  debug: true,
+  env: 'development'
+});
+console.log("\n", "\n");
+
+var layout = makeLayout({
+  template: dir + '/assets/layout.html',
+  port: 1000,
+  scripts: Object.keys(runConfig.entry)
+});
+console.log('Layout:'.yellow.bold, "\n");
+console.log(layout);
