@@ -26,7 +26,7 @@ if (Program.debug) {
 }
 
 // webpack port is next one up
-var wport = Program.port + 1;
+var wport = parseInt(Program.port,10) + 1;
 
 // config
 var config = findConfig({
