@@ -3,14 +3,13 @@
 var Program = require('commander');
 var colors = require('colors');
 var fs = require('fs');
-var NodeGit = require('nodegit');
-var Repository = NodeGit.Repository;
-var clone = NodeGit.Clone.clone;
 var rimraf = require('rimraf');
 var replace = require('replace');
 var Promise = require('bluebird').Promise;
+var mkdirp = require('mkdirp');
 
 Program
+  .option('-d, --debug', 'output extra information for debugging')
   .parse(process.argv);
 
 var name = Program.args;
@@ -30,11 +29,7 @@ var name = name[0];
 console.log();
 console.log('Creating new reapp folder for: %s...'.green, name);
 
-var url = 'git://github.com/reapp/reapp-starter.git';
 var dest = process.cwd() + '/' + name;
-var opts = {
-  bare: true
-};
 
 if (fs.existsSync(dest))
   console.log('Error! This directory already exists'.red);
@@ -42,7 +37,8 @@ else
   start();
 
 function start() {
-  cloneRepo()
+  makeFolder()
+    .then(cloneRepo)
     .then(deleteGitFolder)
     .then(initGit)
     .then(replaceGivenNameInApp)
@@ -55,8 +51,19 @@ function start() {
     });
 }
 
+function makeFolder() {
+  return new Promise(function(resolve, reject) {
+    mkdirp(dest, function(err) {
+      if (err)
+        reject(err);
+      else
+        resolve();
+    });
+  });
+}
+
 function cloneRepo() {
-  return clone(url, dest, opts);
+  return promiseProcess('git clone --depth=1 git@github.com:reapp/reapp-starter.git ' + dest);
 }
 
 function deleteGitFolder() {
@@ -69,8 +76,7 @@ function deleteGitFolder() {
 }
 
 function initGit() {
-  console.log('Initializing git...'.green);
-  return Repository.init(dest + '/.git', 0);
+  return promiseProcess('git init');
 }
 
 function replaceGivenNameInApp() {
@@ -89,34 +95,31 @@ function replaceGivenNameInApp() {
 }
 
 function npmInstall() {
-  return new Promise(function(resolve, reject) {
-    console.log('Running npm install...'.green);
-    process.chdir(dest);
-
-    var exec = require('child_process').exec, child;
-    child = exec('npm install', handleChildProcess.bind(this, resolve, reject));
-  });
+  return promiseProcess('npm install');
 }
 
 function npmDedupe() {
+  return promiseProcess('npm dedupe react');
+}
+
+function promiseProcess(cmd) {
   return new Promise(function(resolve, reject) {
-    console.log('Running npm dedupe...'.green);
+    console.log('Running '+cmd+'...'.green);
     process.chdir(dest);
 
     var exec = require('child_process').exec, child;
-    child = exec('npm dedupe react', handleChildProcess.bind(this, resolve, reject));
+    child = exec(cmd, handleChildProcess.bind(this, resolve, reject));
   });
 }
 
 function handleChildProcess(resolve, reject, error, stdout, stderr) {
   if (error)
-    reject(error);
-  else if (stderr) {
-    console.log('Warnings:'.bold.yellow);
-    resolve(stderr);
-  }
-  else
-    resolve(stdout);
+    return reject(error);
+
+  if (Program.debug)
+    console.log(stderr);
+
+  resolve();
 }
 
 function finish() {
