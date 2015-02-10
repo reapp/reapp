@@ -1,6 +1,6 @@
 {
   "name": "reapp",
-  "version": "0.5.17",
+  "version": "0.5.18",
   "description": "a server, build system, and helpers for react apps",
   "main": "index.js",
   "scripts": {
