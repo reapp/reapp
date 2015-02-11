@@ -10,13 +10,15 @@ var webpackServer = require('reapp-pack/webpackServer');
 var findConfig = require('./lib/findConfig');
 
 var dir = process.cwd();
-require('./lib/checkIsReapp')(dir);
 
 Program
   .option('-d, --debug', 'output extra information for debugging')
   .option('-p, --port [number]', 'specify a port [number]', 3010)
+  .option('-h, --host [host]', 'specify hostname', 'localhost')
   .option('-e, --env [env]', 'specify an enivornment', 'development')
   .parse(process.argv);
+
+require('./lib/checkIsReapp')(dir);
 
 // debug
 if (Program.debug) {
@@ -35,7 +37,8 @@ var config = findConfig({
   port: wport,
   linkModules: true,
   debug: Program.debug,
-  env: Program.env
+  env: Program.env,
+  hostname: Program.host
 });
 
 // html template

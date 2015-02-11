@@ -12,12 +12,13 @@ var fs = require('fs');
 var ncp = require('ncp');
 
 var dir = process.cwd();
-require('./lib/checkIsReapp')(dir);
 
 Program
   .option('-w, --watch', 'watch for changes')
   .option('-d, --debug', 'output extra information for debugging')
   .parse(process.argv);
+
+require('./lib/checkIsReapp')(dir);
 
 if (Program.debug) {
   console.log('CLI received opts:'.blue);

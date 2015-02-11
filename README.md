@@ -53,18 +53,14 @@ Commands:
   new [name]  creates a directory with a new reapp-starter scaffold
   run         runs a reapp application with express/webpack-dev-server
   build       builds a reapp application to a bundle in ./build
+  debug       use this to for opening issues!
   help [cmd]  display help for [cmd]
-
-Options:
-
-  -h, --help     output usage information
-  -V, --version  output the version number
 ```
 
 ### Structure
 
 You can see the exact app that's generated through the [reapp-starter repo](https://github.com/reapp/reapp-starter).
-Only the `/app/app.js` entrypoint and `/assets` folder is "necessary".
+Only the `/app/app.js` entrypoint and `/assets/layout.html` is "necessary".
 In the future, we could have a config file to make this completely custom.
 For now, it's very simple:
 
@@ -146,7 +142,7 @@ Reapp wasn't built purposefully to be a framework. Instead, it started
 as a UI kit. From that kit, two apps were built. While this isn't a lot,
 it was enough to see repetition between the two that could be extracted.
 
-From those two apps, over a peried of months, we extracted a set of
+From those two apps, over a period of months, we extracted a set of
 packages, ensuring to keep each of them completely independent. It was
 an experiment in seeing if a framework was necessary.
 
