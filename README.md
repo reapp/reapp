@@ -38,7 +38,7 @@ setups, from simple to advanced, that you can choose from when generating your a
 ### CLI
 
 The CLI has two main functions that it helps you with. The first is creating new apps.
-For now, it simple makes a bare clone of a repo we keep updated with the current best-practice.
+For now, it simply makes a bare clone of a repo we keep updated with the current best-practice.
 The goal is eventually to have a variety of baseline repo's to choose from.
 
 It also lets you run your app, using [reapp-server](https://github.com/reapp/reapp-server),
