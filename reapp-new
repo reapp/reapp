@@ -63,7 +63,7 @@ function makeFolder() {
 }
 
 function cloneRepo() {
-  return promiseProcess('git clone --depth=1 git@github.com:reapp/reapp-starter.git ' + dest);
+  return promiseProcess('git clone --depth=1 https://github.com/reapp/reapp-starter ' + dest);
 }
 
 function deleteGitFolder() {

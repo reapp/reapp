@@ -175,6 +175,6 @@ library that can be composed well with reapp
 
 Sublime users, some helpful plugins for you to install:
 
-- SublimeLinter
-- eshint
-- JavaScript Next - ES6 Syntax
+- [SublimeLinter](https://github.com/SublimeLinter/SublimeLinter3)
+- [JSXHint](https://github.com/STRML/JSXHint/) has 6to5 support
+- [6to5 sublime](https://github.com/6to5/6to5-sublime)
