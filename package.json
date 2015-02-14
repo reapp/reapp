@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/reapp/reapp",
   "dependencies": {
-    "bluebird": "~2.9.6",
+    "bluebird": "*",
     "colors": "~1.0.3",
-    "commander": "~2.5.1",
+    "commander": "*",
     "mkdirp": "^0.5.0",
     "ncp": "~1.0.1",
     "reapp-pack": "^1.1.9",
