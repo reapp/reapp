@@ -20,7 +20,7 @@
   "dependencies": {
     "bluebird": "*",
     "colors": "~1.0.3",
-    "commander": "*",
+    "commander": "^2.6.0",
     "mkdirp": "^0.5.0",
     "ncp": "~1.0.1",
     "reapp-pack": "^1.1.9",
