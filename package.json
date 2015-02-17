@@ -29,10 +29,10 @@
     "rimraf": "~2.2.8"
   },
   "bin": {
-    "reapp": "./reapp",
-    "reapp-new": "./reapp-new",
-    "reapp-build": "./reapp-build",
-    "reapp-run": "./reapp-run",
-    "reapp-debug": "./reapp-debug"
+    "reapp": "./bin/reapp",
+    "reapp-new": "./bin/reapp-new",
+    "reapp-build": "./bin/reapp-build",
+    "reapp-run": "./bin/reapp-run",
+    "reapp-debug": "./bin/reapp-debug"
   }
 }

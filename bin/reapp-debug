@@ -2,7 +2,7 @@
 
 var colors = require('colors');
 var makeLayout = require('reapp-pack/lib/makeLayout');
-var findConfig = require('./lib/findConfig');
+var findConfig = require('../lib/findConfig');
 var dir = process.cwd();
 
 require('./lib/checkIsReapp')(dir);

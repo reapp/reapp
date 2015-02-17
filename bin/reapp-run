@@ -5,9 +5,9 @@ var colors = require('colors');
 var server = require('reapp-server');
 var pack = require('reapp-pack');
 var makeLayout = require('reapp-pack/lib/makeLayout');
-var makeBuildDir = require('./lib/makeBuildDir');
 var webpackServer = require('reapp-pack/webpackServer');
-var findConfig = require('./lib/findConfig');
+var makeBuildDir = require('../lib/makeBuildDir');
+var findConfig = require('../lib/findConfig');
 
 var dir = process.cwd();
 
@@ -18,7 +18,7 @@ Program
   .option('-e, --env [env]', 'specify an enivornment', 'development')
   .parse(process.argv);
 
-require('./lib/checkIsReapp')(dir);
+require('../lib/checkIsReapp')(dir);
 
 // debug
 if (Program.debug) {
