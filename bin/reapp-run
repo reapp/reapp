@@ -16,6 +16,7 @@ Program
   .option('-p, --port [number]', 'specify a port [number]', 3010)
   .option('-h, --host [host]', 'specify hostname', 'localhost')
   .option('-e, --env [env]', 'specify an enivornment', 'development')
+  .option('-t, --tool [tool]', 'specify a webpack devtool', 'eval')
   .parse(process.argv);
 
 require('../lib/checkIsReapp')(dir);
@@ -38,7 +39,8 @@ var config = findConfig({
   linkModules: true,
   debug: Program.debug,
   env: Program.env,
-  hostname: Program.host
+  hostname: Program.host,
+  devtool: Program.tool
 });
 
 // html template
