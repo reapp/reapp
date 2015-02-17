@@ -5,7 +5,7 @@ var makeLayout = require('reapp-pack/lib/makeLayout');
 var findConfig = require('../lib/findConfig');
 var dir = process.cwd();
 
-require('./lib/checkIsReapp')(dir);
+require('../lib/checkIsReapp')(dir);
 
 console.log('Build config:'.yellow.bold, "\n");
 findConfig({
