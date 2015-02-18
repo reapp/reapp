@@ -10,7 +10,7 @@ Program
   .version(require('../package.json').version)
   .command('new [name]', 'creates a directory with a new reapp-starter scaffold')
   .command('run', 'runs a reapp application with express/webpack-dev-server')
-  .command('build', 'builds a reapp application to a bundle in ./build')
+  .command('build [platform]', 'builds a reapp application to a bundle in ./build')
   .command('debug', 'outputs debug information, use this when opening issues!');
 
 Program.parse(process.argv);

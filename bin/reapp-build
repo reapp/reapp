@@ -26,8 +26,12 @@ if (Program.debug) {
   console.log();
 }
 
+var args = Program.args;
+var platform = args.length && args[0];
+
 var config = findConfig({
   name: 'build',
+  platform: platform,
   dir: dir,
   linkModules: true,
   debug: Program.debug
