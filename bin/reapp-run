@@ -43,8 +43,6 @@ var config = findConfig({
   devtool: Program.tool
 });
 
-console.log(config);
-
 // html template
 var layout = makeLayout({
   template: dir + '/assets/layout.html',
