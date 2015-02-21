@@ -3,11 +3,7 @@
 ### What is it?
 
 Reapp isn't a framework, it's just a collection of packages that work
-well together. On top of that, it's a CLI that does exactly three things:
-
-- `reapp new`: Creates a new app for you
-- `reapp run`: Runs a [reapp-structured](#structure) app
-- `reapp build`: Builds a reapp-structured app into ./build
+well together. On top of that, it's a CLI that bootstraps and runs your app.
 
 We have another section explaining more of the high level thought
 behind Reapp, you can [skip to it now](#why) if you'd like.
@@ -57,7 +53,26 @@ Commands:
   help [cmd]  display help for [cmd]
 ```
 
-### Structure
+### Running & Building Reapp
+
+The `run` command has a few options to help you out. You can do:
+
+- `reapp run -d` (debug) to output information on how it's running your app
+- `reapp run -e production` (env=production) to run your app in production mode, which is much faster
+- `reapp run -t source-map` (tool=source-map) to have full sourcemaps rather than the "eval" style sourcemaps we defualt too
+
+The `build` command is used once you're ready to deploy your app (to either the web or to cordova). For now,
+we provide two types of builds:
+
+- `reapp build` targets the web for mobile sites.
+- `reapp build ios` targets cordova ios devices.
+
+You also have the same flags available as the run commands, to adjust tools and envs.
+
+When you run `reapp build` you'll notice a new `./build` folder where your assets have been copied to. We're working
+on adding more documentation soon on how to get those assets into a Cordova/Phonegap app.
+
+### Structure of your applications
 
 You can see the exact app that's generated through the [reapp-starter repo](https://github.com/reapp/reapp-starter).
 Only the `/app/app.js` entrypoint and `/assets/layout.html` is "necessary".
@@ -103,7 +118,8 @@ To start, you'll want to open `./package.json`. Notice we have the following pac
 - [reapp-platform](https://github.com/reapp/reapp-platform) (Base utils)
 - [reapp-component](https://github.com/reapp/reapp-component) (DI and Factories)
 
-You also have an entry point defined as `app/app.js`. Lets start there.
+You also have an entry point defined as `app/app.js`. This starts your app.
+The most important part here is the routing. Lets start there.
 
 #### [reapp-routes](https://github.com/reapp/reapp-routes) (Routes generator)
 
