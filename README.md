@@ -59,7 +59,7 @@ The `run` command has a few options to help you out. You can do:
 
 - `reapp run -d` (debug) to output information on how it's running your app
 - `reapp run -e production` (env=production) to run your app in production mode, which is much faster
-- `reapp run -t source-map` (tool=source-map) to have full sourcemaps rather than the "eval" style sourcemaps we defualt too
+- `reapp run -t source-map` (tool=source-map) to have full sourcemaps rather than the "eval" style sourcemaps we default to
 
 The `build` command is used once you're ready to deploy your app (to either the web or to cordova). For now,
 we provide two types of builds:
