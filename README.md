@@ -25,12 +25,6 @@ reapp new [name]
 
 Where [name] is the name you'd like to give your new stack.
 
-#### What does this give you?
-
-Reapp new is actually a simple wrapper that clones a bare repository that we've set up
-to use the various reapp pieces optimally. We are working on having a few different
-setups, from simple to advanced, that you can choose from when generating your app.
-
 ### CLI
 
 The CLI has two main functions that it helps you with. The first is creating new apps.
