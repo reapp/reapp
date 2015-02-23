@@ -2,11 +2,15 @@
 
 ### What is it?
 
-Reapp isn't a framework, it's just a collection of packages that work
-well together. On top of that, it's a CLI that bootstraps and runs your app.
+Reapp is a collection of modules that work together. Plus a CLI that bootstraps
+your app and runs a server.
 
-We have another section explaining more of the high level thought
-behind Reapp, you can [skip to it now](#why) if you'd like.
+### Examples
+
+We have two example apps you can check the source to:
+
+ - [Kitchen Sink](https://github.com/reapp/kitchen-sink) ([demo](http://kitchen.reapp.io))
+ - [Hacker News Reader](https://github.com/reapp/hacker-news-app) ([demo](http://hn.reapp.io))
 
 ### Installation
 
