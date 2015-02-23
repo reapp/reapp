@@ -1,7 +1,8 @@
 ### What is it?
 
-Reapp is a collection of modules that work together. Plus a CLI that bootstraps
-your app and runs a server.
+Reapp is everything you need to build amazing hybrid apps with React: a collection of
+modules that work together, a UI kit, and our CLI that bootstraps your app and has a
+pre-configured build server.
 
 ### Examples
 
