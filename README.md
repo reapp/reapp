@@ -1,5 +1,3 @@
-*reapp is just launching in alpha. These docs are far from complete and subject to change!*
-
 ### What is it?
 
 Reapp is a collection of modules that work together. Plus a CLI that bootstraps
