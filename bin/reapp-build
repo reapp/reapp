@@ -38,7 +38,7 @@ var config = findConfig({
 });
 
 // html template
-var layoutIn = dir + '/assets/layout.html';
+var layoutIn = dir + '/assets/layout' + (platform ? '-' + platform : '') + '.html';
 var layoutOut = config.output.path + '/index.html';
 
 var layout = makeLayout({
@@ -52,9 +52,6 @@ makeBuildDir(dir, run);
 
 // copy layout
 fs.writeFile(layoutOut, layout);
-
-// copy icons
-ncp(dir + '/node_modules/reapp-ui/assets', dir + '/build/public/assets');
 
 function run() {
   console.log('Building...'.yellow, "\n");
