@@ -60,7 +60,8 @@ function run() {
     dir: dir,
     template: layout,
     debug: Program.debug,
-    port: Program.port
+    port: Program.port,
+    hostname: Program.host
   });
 
   // webpack-dev-server
@@ -68,7 +69,7 @@ function run() {
     dir: dir,
     hot: true,
     debug: Program.debug,
-    hostname: config.hostname,
+    hostname: Program.host || config.hostname,
     port: wport
   });
 }
