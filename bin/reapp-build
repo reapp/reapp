@@ -44,17 +44,18 @@ var layoutOut = config.output.path + '/index.html';
 var layout = makeLayout({
   template: layoutIn,
   scripts: Object.keys(config.entry),
-  styles: ['main.css']
+  styles: ['main.css'],
+  debug: Program.debug
 });
 
 // build dir
 makeBuildDir(dir, run);
 
-// copy layout
-fs.writeFile(layoutOut, layout);
-
 function run() {
   console.log('Building...'.yellow, "\n");
+
+  // copy layout
+  fs.writeFile(layoutOut, layout);
 
   var compiler = webpack(config, webpackCallback({
     debug: Program.debug
