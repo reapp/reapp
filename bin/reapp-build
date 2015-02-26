@@ -8,8 +8,8 @@ var webpack = require('reapp-pack/webpack');
 var webpackCallback = require('reapp-pack/lib/callback');
 var makeBuildDir = require('../lib/makeBuildDir');
 var findConfig = require('../lib/findConfig');
-var fs = require('fs');
-var ncp = require('ncp');
+var write = require('fs').writeFile;
+var copy = require('ncp');
 
 var dir = process.cwd();
 
@@ -27,7 +27,7 @@ if (Program.debug) {
 }
 
 var args = Program.args;
-var platform = args.length && args[0];
+var platform = args.length && args[0] || 'web';
 
 var config = findConfig({
   name: 'build',
@@ -37,10 +37,9 @@ var config = findConfig({
   debug: Program.debug
 });
 
-// html template
-var layoutIn = dir + '/assets/layout' + (platform ? '-' + platform : '') + '.html';
-var layoutOut = config.output.path + '/index.html';
 
+var layoutIn = dir + '/assets/layout-' + platform + '.html';
+var layoutOut = config.output.path + '/index.html';
 var layout = makeLayout({
   template: layoutIn,
   scripts: Object.keys(config.entry),
@@ -54,8 +53,8 @@ makeBuildDir(dir, run);
 function run() {
   console.log('Building...'.yellow, "\n");
 
-  // copy layout
-  fs.writeFile(layoutOut, layout);
+  write(layoutOut, layout);
+  copy(dir + '/assets', dir + '/build/public/assets');
 
   var compiler = webpack(config, webpackCallback({
     debug: Program.debug
