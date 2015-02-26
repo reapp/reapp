@@ -20,12 +20,6 @@ Program
 
 require('../lib/checkIsReapp')(dir);
 
-if (Program.debug) {
-  console.log('CLI received opts:'.blue);
-  console.log(Program);
-  console.log();
-}
-
 var args = Program.args;
 var platform = args.length && args[0] || 'web';
 
@@ -33,15 +27,11 @@ var config = findConfig({
   name: 'build',
   platform: platform,
   dir: dir,
-  linkModules: true,
   debug: Program.debug
 });
 
-
-var layoutIn = dir + '/assets/layout-' + platform + '.html';
-var layoutOut = config.output.path + '/index.html';
 var layout = makeLayout({
-  template: layoutIn,
+  template: dir + '/assets/layout-' + platform + '.html',
   scripts: Object.keys(config.entry),
   styles: ['main.css'],
   debug: Program.debug
@@ -53,7 +43,7 @@ makeBuildDir(dir, run);
 function run() {
   console.log('Building...'.yellow, "\n");
 
-  write(layoutOut, layout);
+  write(config.output.path + '/index.html', layout);
   copy(dir + '/assets', dir + '/build/public/assets');
 
   var compiler = webpack(config, webpackCallback({

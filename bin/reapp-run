@@ -21,13 +21,6 @@ Program
 
 require('../lib/checkIsReapp')(dir);
 
-// debug
-if (Program.debug) {
-  console.log('CLI received opts:'.blue.bold);
-  console.log(Program);
-  console.log();
-}
-
 var platform = Program.args.length && Program.args[0] || 'web';
 
 // webpack port is next one up
@@ -36,6 +29,7 @@ var wport = parseInt(Program.port,10) + 1;
 // config
 var config = findConfig({
   name: 'run',
+  platform: platform,
   dir: dir,
   port: wport,
   linkModules: true,
