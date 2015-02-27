@@ -16,6 +16,8 @@ var dir = process.cwd();
 Program
   .option('-w, --watch', 'watch for changes')
   .option('-d, --debug', 'output extra information for debugging')
+  .option('--no-assets', 'only build the js')
+  .option('--no-js', 'only build the assets')
   .parse(process.argv);
 
 require('../lib/checkIsReapp')(dir);
@@ -31,7 +33,7 @@ var config = findConfig({
 });
 
 var layout = makeLayout({
-  template: dir + '/assets/layout-' + platform + '.html',
+  template: dir + '/assets/' + platform + '/index.html',
   scripts: Object.keys(config.entry),
   styles: ['main.css'],
   debug: Program.debug
@@ -43,10 +45,20 @@ makeBuildDir(dir, run);
 function run() {
   console.log('Building...'.yellow, "\n");
 
-  write(config.output.path + '/index.html', layout);
-  copy(dir + '/assets', dir + '/build/public/assets');
+  if (Program.assets) {
+    write(config.output.path + '/index.html', layout);
 
-  var compiler = webpack(config, webpackCallback({
-    debug: Program.debug
-  }));
+    // copy assets
+    var assetsDir = dir + '/assets/';
+    var assetsOutDir = config.output.path + '/assets';
+    copy(assetsDir + platform, assetsOutDir, function() {
+      copy(assetsDir + 'shared/', assetsOutDir);
+    });
+  }
+
+  if (Program.js) {
+    var compiler = webpack(config, webpackCallback({
+      debug: Program.debug
+    }));
+  }
 }
