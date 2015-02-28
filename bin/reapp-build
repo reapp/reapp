@@ -38,7 +38,7 @@ var config = findConfig({
 });
 
 
-var layoutIn = dir + '/assets/layout-' + platform + '.html';
+var layoutIn = dir + '/assets/layout-' + (platform ? '.' + platform : platform) + '.html';
 var layoutOut = config.output.path + '/index.html';
 var layout = makeLayout({
   template: layoutIn,
