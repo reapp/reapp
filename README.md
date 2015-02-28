@@ -39,15 +39,36 @@ a simple express server that works well with the default app structure.
 
 CLI Usage:
 ```
-Usage: reapp [options] [command]
-
-Commands:
+Usage: reapp [command]
 
   new [name]  creates a directory with a new reapp-starter scaffold
   run         runs a reapp application with express/webpack-dev-server
   build       builds a reapp application to a bundle in ./build
   debug       use this to for opening issues!
   help [cmd]  display help for [cmd]
+```
+
+The build and run commands take a variety of options to help ease your development, such as:
+
+```
+Usage: reapp-run [options]
+
+  -h, --help           output usage information
+  -d, --debug          output extra information for debugging
+  -p, --port [number]  specify a port [number]
+  -h, --host [host]    specify hostname
+  -e, --env [env]      specify an enivornment
+  -t, --tool [tool]    specify a webpack devtool
+```
+
+```
+Usage: reapp-build [options]
+
+  -h, --help   output usage information
+  -w, --watch  watch for changes
+  -d, --debug  output extra information for debugging
+  --no-assets  only build the js
+  --no-js      only build the assets
 ```
 
 ### Running & Building Reapp

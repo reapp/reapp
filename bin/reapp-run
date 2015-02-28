@@ -41,7 +41,7 @@ var config = findConfig({
 
 // html template
 var layout = makeLayout({
-  template: dir + '/assets/layout-'+ platform +'.html',
+  template: dir + '/assets/'+platform+'/index.html',
   port: wport,
   hostname: config.hostname,
   scripts: Object.keys(config.entry)
