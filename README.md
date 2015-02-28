@@ -4,6 +4,10 @@ Reapp is everything you need to build amazing hybrid apps with React: a collecti
 modules that work together, a UI kit, and our CLI that bootstraps your app and has a
 pre-configured build server.
 
+### Help
+
+[![Join the chat at https://gitter.im/reapp/reapp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/reapp/reapp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ### Examples
 
 We have two example apps you can check the source to:
