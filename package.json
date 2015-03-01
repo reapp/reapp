@@ -23,7 +23,7 @@
     "commander": "^2.6.0",
     "mkdirp": "^0.5.0",
     "ncp": "~1.0.1",
-    "reapp-pack": "^1.2.0",
+    "reapp-pack": "^1.2.4",
     "reapp-server": "^1.0.1",
     "replace": "~0.3.0",
     "rimraf": "~2.2.8"
