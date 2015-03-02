@@ -1,8 +1,6 @@
 #### In general, if you haven't customized your app much, it may be better to create a new reapp folder and copy in your changes
 
-
-
-### 0.7
+## 0.7
 
 For CLI 0.7 we've added iOS builds and layouts. If you want to read on multiple builds,check out  [multiple build files](https://github.com/reapp/reapp#custom-builds).
 
