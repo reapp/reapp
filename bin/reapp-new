@@ -19,9 +19,24 @@ if (!args.length) {
   process.exit(1);
 }
 
-if (args.length > 1) {
+if (args.length > 2) {
   console.log('sorry, we don\'t support multiple names'.red);
   process.exit(1);
+}
+
+// allow custom repos
+var repo = 'reapp';
+var repoName = 'default';
+
+if (args.length === 2) {
+  var repoArg = args[1];
+  if (repoArg.indexOf('/') !== -1) {
+    repo = repoArg.split('/')[0];
+    repoName = repoArg.split('/')[1];
+  }
+  else {
+    repoName = repoArg;
+  }
 }
 
 var name = args[0];
@@ -62,8 +77,17 @@ function makeFolder() {
   });
 }
 
+function getRepo() {
+  return 'https://github.com/'+repo+'/starter-'+repoName;
+}
+
 function cloneRepo() {
-  return promiseProcess('git clone --depth=1 https://github.com/reapp/reapp-starter ' + dest);
+  if (Program.debug)
+    console.log('Looking for template in %s', getRepo());
+
+  return promiseProcess(
+    'git clone --depth=1 '+getRepo()+' '+ dest
+  );
 }
 
 function deleteGitFolder() {

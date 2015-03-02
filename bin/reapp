@@ -8,7 +8,7 @@ if (process.argv.length === 2) {
 
 Program
   .version(require('../package.json').version)
-  .command('new [name]', 'creates a directory with a new reapp-starter scaffold')
+  .command('new [name] [template]', 'creates a directory with a new reapp-starter scaffold, name required but template optional')
   .command('run [platform]', 'runs a reapp application with express/webpack-dev-server')
   .command('build [platform]', 'builds a reapp application to a bundle in ./build')
   .command('debug', 'outputs debug information, use this when opening issues!');
