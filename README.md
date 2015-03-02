@@ -83,13 +83,15 @@ The `run` command has a few options to help you out. You can do:
 - `reapp run -e production` (env=production) to run your app in production mode, which is much faster
 - `reapp run -t source-map` (tool=source-map) to have full sourcemaps rather than the "eval" style sourcemaps we default to
 
+You also have the same flags available as the run commands.
+
 The `build` command is used once you're ready to deploy your app (to either the web or to cordova). For now,
 we provide two types of builds:
 
 - `reapp build` targets the web for mobile sites.
 - `reapp build ios` targets cordova ios devices.
 
-You also have the same flags available as the run commands, to adjust tools and envs.
+[See more on custom builds](#custom-builds).
 
 When you run `reapp build` you'll notice a new `./build` folder where your assets have been copied to. We're working
 on adding more documentation soon on how to get those assets into a Cordova/Phonegap app.
@@ -168,13 +170,35 @@ need: constants, styles, and animations. You can just use the included iOS theme
 but we've included the `./app/theme` folder as an example of how you can easily
 customize themes.
 
-#### Other packages
+#### More reading
 
 - [reapp](https://github.com/reapp/reapp-ui) (CLI)
 - [reapp-platform](https://github.com/reapp/reapp-platform) (Base utils)
 - [reapp-component](https://github.com/reapp/reapp-component) (DI and Factories)
 
-### Why
+### Custom builds
+
+Reapp-pack takes in an object that lets you configure your builds. To read more on
+the options that takes, see the [reapp-pack readme](http://github.com/reapp/reapp-pack).
+
+Reapp will automatically look for your build files, and you can override the defaults if
+you'd like. If you don't have a config folder, it will just use the defaults.
+
+The way it looks for config files:
+
+- `reapp run` looks for:
+  - `./config/run.config.js`
+  - `reapp-pack/config/run.js`
+
+- `reapp build` looks for:
+  - `./config/build.config.js`
+  - `reapp-pack/config/build.js`
+
+- `reapp build [platform]` looks for:
+  - `./config/build.[platform].config.js`
+  - `reapp-pack/config/build.[platform].js`
+
+### Why Reapp?
 
 Reapp wasn't built purposefully to be a framework. Instead, it started
 as a UI kit. From that kit, two apps were built. While this isn't a lot,
@@ -211,8 +235,5 @@ library that can be composed well with reapp
 
 ### Development Environment
 
-Sublime users, some helpful plugins for you to install:
-
-- [SublimeLinter](https://github.com/SublimeLinter/SublimeLinter3)
-- [JSXHint](https://github.com/STRML/JSXHint/) has [Babel](https://babeljs.io/) support
-- [babel-sublime](https://github.com/babel/babel-sublime)
+Sublime users, [here's a guide](https://medium.com/@dan_abramov/lint-like-it-s-2015-6987d44c5b48)
+for getting syntax highlighting, snippets and linting that works with babel.
