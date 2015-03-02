@@ -1,5 +1,4 @@
-**If you haven't customized your app much, it may be easier to just create a new reapp
-folder and copy in your changes**
+#### In general, if you haven't customized your app much, it may be better to create a new reapp folder and copy in your changes
 
 
 
