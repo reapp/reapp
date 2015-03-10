@@ -1,6 +1,6 @@
 ### What is it?
 
-Reapp is everything you need to build amazing hybrid apps with React: a collection of
+Reapp is everything you need to build amazing apps with React: a collection of
 packages that work together, our UI kit, and a CLI that scaffolds your app and includes
 a server and build system.
 
