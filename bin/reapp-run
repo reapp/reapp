@@ -15,6 +15,7 @@ Program
   .option('-d, --debug', 'output extra information for debugging')
   .option('-p, --port [number]', 'specify a port [number]', 3010)
   .option('-h, --host [host]', 'specify hostname', 'localhost')
+  .option('-b, --bind [address]', 'specify bind ip address','localhost')
   .option('-e, --env [env]', 'specify an enivornment', 'development')
   .option('-t, --tool [tool]', 'specify a webpack devtool', 'eval')
   .parse(process.argv);
@@ -57,7 +58,7 @@ function run() {
     template: layout,
     debug: Program.debug,
     port: Program.port,
-    hostname: Program.host
+    hostname: Program.bind || Program.host
   });
 
   // webpack-dev-server
@@ -65,7 +66,7 @@ function run() {
     dir: dir,
     hot: true,
     debug: Program.debug,
-    hostname: Program.host || config.hostname,
+    hostname: Program.bind || Program.host || config.hostname,
     port: wport
   });
 }

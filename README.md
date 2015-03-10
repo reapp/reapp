@@ -61,6 +61,7 @@ Usage: reapp-run [options]
   -d, --debug          output extra information for debugging
   -p, --port [number]  specify a port [number]
   -h, --host [host]    specify hostname
+  -b, --bind [address] specify bind address if different from host
   -e, --env [env]      specify an enivornment
   -t, --tool [tool]    specify a webpack devtool
 ```
