@@ -1,5 +1,3 @@
-#### In general, if you haven't customized your app much, it may be better to create a new reapp folder and copy in your changes
-
 ## 0.8
 
 Reapp 0.8 doesn't require any change in your app structure. It does change how builds
@@ -29,6 +27,8 @@ This enables parallel builds! So if you want to build your ios and web apps at t
 time you can. We need to test it but the change in structure enables this, in practice.
 
 ## 0.7
+
+#### In general, if you haven't customized your app much, it may be better to create a new reapp folder and copy in your changes
 
 For CLI 0.7 we've added iOS builds and layouts. If you want to read on multiple builds,check out  [multiple build files](https://github.com/reapp/reapp#custom-builds).
 
