@@ -39,8 +39,7 @@ var layout = makeLayout({
 });
 
 // build dir
-var buildDir = config.output.path;
-recreateDir(buildDir, run);
+recreateDir(config, platform, run);
 
 function run() {
   console.log('Building...'.yellow, "\n");
@@ -50,8 +49,8 @@ function run() {
     var compiler = webpack(config, webpackCallback({
       debug: Program.debug
     }));
+  }
 
   if (Program.assets)
-    copyAssets(platform, dir, buildDir, layout);
-  }
+    copyAssets(platform, dir, config.output.path, layout);
 }

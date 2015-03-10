@@ -49,7 +49,7 @@ var layout = makeLayout({
 });
 
 // make build dir and run
-recreateDir(dir, run);
+recreateDir(config, platform, run);
 
 function run() {
   // express
