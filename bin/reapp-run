@@ -6,7 +6,7 @@ var server = require('reapp-server');
 var pack = require('reapp-pack');
 var makeLayout = require('reapp-pack/lib/makeLayout');
 var webpackServer = require('reapp-pack/webpackServer');
-var makeBuildDir = require('../lib/makeBuildDir');
+var recreateDir = require('../lib/recreateDir');
 var findConfig = require('../lib/findConfig');
 
 var dir = process.cwd();
@@ -49,7 +49,7 @@ var layout = makeLayout({
 });
 
 // make build dir and run
-makeBuildDir(dir, run);
+recreateDir(dir, run);
 
 function run() {
   // express
