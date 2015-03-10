@@ -1,5 +1,33 @@
 #### In general, if you haven't customized your app much, it may be better to create a new reapp folder and copy in your changes
 
+## 0.8
+
+Reapp 0.8 doesn't require any change in your app structure. It does change how builds
+work though. First, asset copying order is different.
+
+Now, when you run `reapp build ios`:
+
+```
+./assets/shared/* => ./build/ios
+./assets/ios/* => ./build/ios
+./assets/ios/index.html => (Webpack inserts CSS/JS references) => ./build/ios/index.html
+```
+
+This lets you keep, for example, a cordova config.xml inside your `./assets/shared` and
+have it copied to your build dir automatically.
+
+The second change is where it build to. Before, no matter the platform `reapp build` or
+`reapp build [platform]` all build to the same directory `./assets/public`. This was
+poor design. Now, we build to the subdirectory of your app, so:
+
+```
+reapp build => ./build/web
+reapp build ios => ./build/ios
+```
+
+This enables parallel builds! So if you want to build your ios and web apps at the same
+time you can. We need to test it but the change in structure enables this, in practice.
+
 ## 0.7
 
 For CLI 0.7 we've added iOS builds and layouts. If you want to read on multiple builds,check out  [multiple build files](https://github.com/reapp/reapp#custom-builds).
