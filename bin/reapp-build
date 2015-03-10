@@ -6,10 +6,9 @@ var pack = require('reapp-pack');
 var makeLayout = require('reapp-pack/lib/makeLayout');
 var webpack = require('reapp-pack/webpack');
 var webpackCallback = require('reapp-pack/lib/callback');
-var makeBuildDir = require('../lib/makeBuildDir');
+var recreateDir = require('../lib/recreateDir');
 var findConfig = require('../lib/findConfig');
-var write = require('fs').writeFile;
-var copy = require('ncp');
+var copyAssets = require('../lib/copyAssets');
 
 var dir = process.cwd();
 
@@ -40,25 +39,19 @@ var layout = makeLayout({
 });
 
 // build dir
-makeBuildDir(dir, run);
+var buildDir = config.output.path;
+recreateDir(buildDir, run);
 
 function run() {
   console.log('Building...'.yellow, "\n");
 
-  if (Program.assets) {
-    write(config.output.path + '/index.html', layout);
-
-    // copy assets
-    var assetsDir = dir + '/assets/';
-    var assetsOutDir = config.output.path + '/assets';
-    copy(assetsDir + platform, assetsOutDir, function() {
-      copy(assetsDir + 'shared/', assetsOutDir);
-    });
-  }
-
   if (Program.js) {
+    console.log('Building with webpack...');
     var compiler = webpack(config, webpackCallback({
       debug: Program.debug
     }));
+
+  if (Program.assets)
+    copyAssets(platform, dir, buildDir, layout);
   }
 }

@@ -1,8 +1,8 @@
 ### What is it?
 
 Reapp is everything you need to build amazing hybrid apps with React: a collection of
-modules that work together, a UI kit, and our CLI that bootstraps your app and has a
-pre-configured build server.
+packages that work together, our UI kit, and a CLI that scaffolds your app and includes
+a server and build system.
 
 ### Help
 
@@ -18,21 +18,25 @@ We have two example apps you can check the source to:
 ### Installation
 
 Installation is done through npm, though you can pick and choose any pieces you'd like
-and roll your own stack. To get the reapp CLI:
+and roll your own stack.
 
 ```
 npm install -g reapp
 ```
 
-Once that's done you can generate a new base reapp stack with:
+Generate a new base reapp stack with:
 
 ```
 reapp new [name]
 ```
 
-Where [name] is the name you'd like to give your new stack.
+And finally in your app directory, run it on [localhost:3010](http://localhost:3010):
 
-### CLI
+```
+reapp run
+```
+
+### CLI Options
 
 The CLI has two main functions that it helps you with. The first is creating new apps.
 For now, it simply makes a bare clone of a repo we keep updated with the current best-practice.
@@ -49,7 +53,6 @@ Usage: reapp [command]
   run         runs a reapp application with express/webpack-dev-server
   build       builds a reapp application to a bundle in ./build
   debug       use this to for opening issues!
-  help [cmd]  display help for [cmd]
 ```
 
 The build and run commands take a variety of options to help ease your development, such as:
@@ -57,7 +60,6 @@ The build and run commands take a variety of options to help ease your developme
 ```
 Usage: reapp-run [options]
 
-  -h, --help           output usage information
   -d, --debug          output extra information for debugging
   -p, --port [number]  specify a port [number]
   -h, --host [host]    specify hostname
@@ -69,39 +71,52 @@ Usage: reapp-run [options]
 ```
 Usage: reapp-build [options]
 
-  -h, --help   output usage information
-  -w, --watch  watch for changes
   -d, --debug  output extra information for debugging
   --no-assets  only build the js
   --no-js      only build the assets
 ```
 
-### Running & Building Reapp
+### Running & Building
 
-The `run` command has a few options to help you out. You can do:
+Use `reapp run` to server your app locally, by default at [localhost:3010](http://localhost:3010).
+The `run` command has a few options to help you out:
 
 - `reapp run -d` (debug) to output information on how it's running your app
 - `reapp run -e production` (env=production) to run your app in production mode, which is much faster
 - `reapp run -t source-map` (tool=source-map) to have full sourcemaps rather than the "eval" style sourcemaps we default to
 
-You also have the same flags available as the run commands.
+You also have the same flags available to build commands.
 
 The `build` command is used once you're ready to deploy your app (to either the web or to cordova). For now,
 we provide two types of builds:
 
-- `reapp build` targets the web for mobile sites.
-- `reapp build ios` targets cordova ios devices.
+- `reapp build` by default sets the platform to **web**, for mobile sites.
+- `reapp build ios` targets Cordova ios devices.
+
+When you run `reapp build` you'll notice a new `./build` folder where your assets have been copied to.
+For example, a `reapp build ios` will build to `./build/ios`. `reapp build` goes to `./build/web`.
+
+It will also copy your assets for you. Here's an example of running `reapp build ios`:
+
+```
+./assets/shared/* => ./build/ios
+./assets/ios/* => ./build/ios
+./assets/ios/index.html => (Webpack inserts CSS/JS references) => ./build/ios/index.html
+```
+
+This allows a lot of flexibility. You can share assets between builds, or have
+exclusive ones for a platform. Leave an asset in the base `./assets` folder
+and it won't be copied at all, but you can still `require()` it within your app.
+
+A good case for shared assets is your Cordova config.xml. Leave it in `./assets/shared`
+and it'll output for all your builds.
 
 [See more on custom builds](#custom-builds).
-
-When you run `reapp build` you'll notice a new `./build` folder where your assets have been copied to. We're working
-on adding more documentation soon on how to get those assets into a Cordova/Phonegap app.
 
 ### Structure of your applications
 
 You can see the exact app that's generated through the [reapp-starter repo](https://github.com/reapp/reapp-starter).
-Only the `/app/app.js` entrypoint and `/assets/layout.html` is "necessary".
-In the future, we could have a config file to make this completely custom.
+Only the `/app/app.js` entrypoint and `/assets/web/index.html` is "necessary".
 For now, it's very simple:
 
 ```
@@ -111,14 +126,18 @@ For now, it's very simple:
   app.js
   routes.js
 /assets
-  layout.html
+  /web
+    index.html
+  /ios
+    index.html
+  /shared
 /config (optional)
 ```
 
 `/app/app.js` is your entry point. Everything in the app folder should be pretty
-self-explanatory. `/assets` contains static assets, with a `layout.html` that is used
-to serve your app within. In general, you should't have to touch the layout, even for
-adding styles.
+self-explanatory. `/assets` contains static assets as explained in the [Running & Building](#running-and-building)
+section. In general, you'll place your assets into `shared` or the specific platform
+subdirectory.
 
 The `/theme` folder is [reapp-ui](https://github.com/reapp/reapp-ui) specific. You can
 find docs for it in the repo, but it also should be pretty easy to understand.
