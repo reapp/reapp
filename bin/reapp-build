@@ -44,13 +44,27 @@ recreateDir(config, platform, run);
 function run() {
   console.log('Building...'.yellow, "\n");
 
-  if (Program.js) {
-    console.log('Building with webpack...');
-    var compiler = webpack(config, webpackCallback({
-      debug: Program.debug
-    }));
-  }
+  if (Program.js && Program.assets)
+    compileJS(compileAssets);
+  else if (Program.assets)
+    compileAssets();
+  else if (Program.js)
+    compileJS();
+}
 
-  if (Program.assets)
-    copyAssets(platform, dir, config.output.path, layout);
+function compileJS(cb) {
+  console.log('Building with webpack...');
+
+  var webpackCallbackHandler = webpackCallback({
+    debug: Program.debug
+  });
+
+  webpack(config, function(err, stats) {
+    webpackCallbackHandler(err, stats);
+    cb();
+  });
+}
+
+function compileAssets(cb) {
+  copyAssets(platform, dir, config.output.path, layout, cb);
 }
