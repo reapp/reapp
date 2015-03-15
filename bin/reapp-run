@@ -16,7 +16,7 @@ Program
   .option('-p, --port [number]', 'specify a port [number]', 3010)
   .option('-h, --host [host]', 'specify hostname', 'localhost')
   .option('-b, --bind [address]', 'specify bind ip address','localhost')
-  .option('-e, --env [env]', 'specify an enivornment', 'development')
+  .option('-e, --env [env]', 'specify an environment', 'development')
   .option('-t, --tool [tool]', 'specify a webpack devtool', 'eval')
   .parse(process.argv);
 
