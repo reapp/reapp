@@ -4,16 +4,7 @@ Reapp is everything you need to build amazing apps with React: a collection of
 packages that work together, our UI kit, and a CLI that scaffolds your app and includes
 a server and build system.
 
-### Help
-
 [![Join the chat at https://gitter.im/reapp/reapp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/reapp/reapp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-### Examples
-
-We have two example apps you can check the source to:
-
- - [Kitchen Sink](https://github.com/reapp/kitchen-sink) ([demo](http://kitchen.reapp.io))
- - [Hacker News Reader](https://github.com/reapp/hacker-news-app) ([demo](http://hn.reapp.io))
 
 ### Installation
 
@@ -236,6 +227,13 @@ build system built in, without having to do anything.
 Really, Reapp is simple. You could even just use the UI kit and roll your own
 app. We just went through that headache, and decided to make it easier to
 avoid it if you like how we make apps.
+
+### Example Apps
+
+We have two example apps you can check the source to:
+
+ - [Kitchen Sink](https://github.com/reapp/kitchen-sink) ([demo](http://kitchen.reapp.io))
+ - [Hacker News Reader](https://github.com/reapp/hacker-news-app) ([demo](http://hn.reapp.io))
 
 ### Roadmap
 
