@@ -156,15 +156,13 @@ To start, you'll want to open `./package.json`. Notice we have the following pac
 You also have an entry point defined as `app/app.js`. This starts your app.
 The most important part here is the routing. Lets start there.
 
-#### [reapp-routes](https://github.com/reapp/reapp-routes) (Routes generator)
+#### ./app/routes ([reapp-routes](https://github.com/reapp/reapp-routes))
 
-reapp-routes is a DRY nested route-to-directory mapping system. As long as
-your routes map to your component file structure, you can save lots of time
-and enforce consistency in your app, a win-win.
+We've rolled our own simple DSL for routes. It saves you a lot of time,
+essentially saving you from having to do bunch of typing as long as you
+keep your components structure consistent with the routes.
 
-Notice how the import looks for `reapp-routes/react-router`.
-The first import in app.js is your router. We love react-router, so we included
-a reapp-routes generator for that by default, but you could write your own.
+We map these routes to [react-router](https://github.com/rackt/react-router) by default.
 
 You'll notice that the pre-defined routes all perfectly map to the structure of
 `./app/components`. To see more about how this works, check out reapp-routes.
@@ -173,19 +171,20 @@ This is the reapp-routes syntax. The key to note here is the `require` that
 is passed to the routes function at the top level, which is how it dynamically
 requires your components based on the route tree.
 
-#### [reapp-ui](https://github.com/reapp/reapp-ui) (UI Kit)
+#### ./app/theme [reapp-ui](https://github.com/reapp/reapp-ui) (UI Kit)
 
-The next theme we require is the `./app/theme.js` file. reapp-ui has it's own
-documentation, but themes are the core of reapp-ui. They have three things they
+The next theme we require is the `./app/theme/theme.js` file. They have three things they
 need: constants, styles, and animations. You can just use the included iOS theme,
 but we've included the `./app/theme` folder as an example of how you can easily
 customize themes.
 
+For more documentation on themes, [read here](http://reapp.io/docs-themes.html).
+
 #### More reading
 
-- [reapp](https://github.com/reapp/reapp-ui) (CLI)
-- [reapp-platform](https://github.com/reapp/reapp-platform) (Base utils)
-- [reapp-component](https://github.com/reapp/reapp-component) (DI and Factories)
+- [reapp-ui](https://github.com/reapp/reapp-ui)
+- [reapp-platform](https://github.com/reapp/reapp-platform)
+- [reapp-component](https://github.com/reapp/reapp-component)
 
 ### Custom builds
 
