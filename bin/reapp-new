@@ -107,7 +107,7 @@ function replaceGivenNameInApp() {
   return new Promise(function(resolve, reject) {
     console.log('Inserting your name...'.green);
     replace({
-      regex: '{{reappName}}',
+      regex: 'REAPP_NAME',
       replacement: name,
       paths: [dest],
       recursive: true,
