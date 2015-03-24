@@ -8,8 +8,7 @@ a server and build system.
 
 ### Installation
 
-Installation is done through npm, though you can pick and choose any pieces you'd like
-and roll your own stack.
+Installation is done through npm:
 
 ```
 npm install -g reapp
