@@ -61,14 +61,16 @@ function run() {
     hostname: Program.bind || Program.host
   });
 
-  console.log('You may see warnings on your routes, this is normal!');
+  console.log();
 
-  // webpack-dev-server
-  webpackServer(config, {
+  var devServerConfig = {
     dir: dir,
     hot: true,
     debug: Program.debug,
     hostname: Program.bind || Program.host || config.hostname,
     port: wport
-  });
+  };
+
+  // webpack-dev-server
+  webpackServer(config, devServerConfig);
 }
