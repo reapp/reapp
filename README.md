@@ -26,7 +26,7 @@ And finally in your app directory, run it on [localhost:3010](http://localhost:3
 reapp run
 ```
 
-### CLI Options
+### CLI
 
 The CLI has two main functions that it helps you with. The first is creating new apps.
 For now, it simply makes a bare clone of a repo we keep updated with the current best-practice.
@@ -187,25 +187,40 @@ For more documentation on themes, [read here](http://reapp.io/docs-themes.html).
 
 ### Custom builds
 
-Reapp-pack takes in an object that lets you configure your builds. To read more on
-the options that takes, see the [reapp-pack readme](http://github.com/reapp/reapp-pack).
+Reapp-pack takes in an object that lets you configure your builds. It provides you with
+[default config files](https://github.com/reapp/reapp-pack/tree/master/config), but you
+can override them if you need custom Webpack loaders.
 
-Reapp will automatically look for your build files, and you can override the defaults if
-you'd like. If you don't have a config folder, it will just use the defaults.
+The build system generates your Webpack config using [reapp-pack](https://github.com/reapp/reapp-pack).
 
-The way it looks for config files:
+- `reapp run` looks for: `./config/run.config.js`
+- `reapp build` looks for: `./config/build.config.js`
+- `reapp build [platform]` looks for: `./config/build.[platform].config.js`
 
-- `reapp run` looks for:
-  - `./config/run.config.js`
-  - `reapp-pack/config/run.js`
+Place a config in your `./config/[run/build].[platform].config.js` to override the default.
 
-- `reapp build` looks for:
-  - `./config/build.config.js`
-  - `reapp-pack/config/build.js`
+Here's an example config:
 
-- `reapp build [platform]` looks for:
-  - `./config/build.[platform].config.js`
-  - `reapp-pack/config/build.[platform].js`
+```js
+module.exports = {
+  entry: './app/app.js',
+  devtool: 'none',
+  target: 'web',
+  env: 'production',
+  linkModules: true,
+  debug: true,
+  separateStylesheet: true,
+  minify: true
+};
+```
+
+You can also provide the following options that are passed to Webpack:
+
+```
+  loaders: array
+  modulesDirectories: array
+  prefetch: array
+```
 
 ### Why Reapp?
 
@@ -232,22 +247,6 @@ We have two example apps you can check the source to:
 
  - [Kitchen Sink](https://github.com/reapp/kitchen-sink) ([demo](http://kitchen.reapp.io))
  - [Hacker News Reader](https://github.com/reapp/hacker-news-app) ([demo](http://hn.reapp.io))
-
-### Roadmap
-
-Our initial goals are simple: focus on completeness, consistency, and performance.
-Also, a theme for Android.
-
-Down the road we'd like to achieve the following:
-
-- **Isomorphic** - Render first on server, pass data over
-to client to continue from there (easily achievable).
-- **Responsive** - Support for tablet style interfaces
-and JS-powered responsive styling.
-- **Physics** - A spring based physics library
-into the animation library with an easy syntax.
-- **Interaction** - A simple, declarative interaction
-library that can be composed well with reapp
 
 ### Development Environment
 
