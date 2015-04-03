@@ -45,7 +45,8 @@ var layout = makeLayout({
   template: dir + '/assets/'+platform+'/index.html',
   port: wport,
   hostname: config.hostname,
-  scripts: Object.keys(config.entry)
+  scripts: Object.keys(config.entry),
+  debug: Program.debug
 });
 
 // make build dir and run

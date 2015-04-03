@@ -106,8 +106,6 @@ and it'll output for all your builds.
 ### Structure of your applications
 
 You can see the exact app that's generated through the [reapp-starter repo](https://github.com/reapp/reapp-starter).
-Only the `/app/app.js` entrypoint and `/assets/web/index.html` is "necessary".
-For now, it's very simple:
 
 ```
 /app
@@ -123,7 +121,7 @@ For now, it's very simple:
 /config (optional)
 ```
 
-`/app/app.js` is your entry point. Everything in the app folder should be pretty
+By default `/app/app.js` is your entry point. Everything in the app folder should be pretty
 self-explanatory. `/assets` contains static assets as explained in the [Running & Building](#running-and-building)
 section. In general, you'll place your assets into `shared` or the specific platform
 subdirectory.
