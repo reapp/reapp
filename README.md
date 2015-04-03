@@ -114,7 +114,6 @@ For now, it's very simple:
   /components
   /theme
   app.js
-  routes.js
 /assets
   /web
     index.html
@@ -145,39 +144,47 @@ as a tour of a reapp app, giving an introduction to packages as we encounter the
 
 You can check out the [reapp project on Github](https://github.com/reapp) for more info.
 
-To start, you'll want to open `./package.json`. Notice we have the following packages:
-- [reapp-routes](https://github.com/reapp/reapp-routes) (Routes generator)
-- [reapp-ui](https://github.com/reapp/reapp-ui) (UI Kit)
-- [reapp](https://github.com/reapp/reapp-ui) (CLI)
-- [reapp-platform](https://github.com/reapp/reapp-platform) (Base utils)
-- [reapp-component](https://github.com/reapp/reapp-component) (DI and Factories)
-
 You also have an entry point defined as `app/app.js`. This starts your app.
 The most important part here is the routing. Lets start there.
 
-#### ./app/routes ([reapp-routes](https://github.com/reapp/reapp-routes))
+#### ./app/app.js
 
-We've rolled our own simple DSL for routes. It saves you a lot of time,
-essentially saving you from having to do bunch of typing as long as you
-keep your components structure consistent with the routes.
+Load all your stuff. From theme to store to actions. Then, you run your routes,
+which are done using reapp-routes. This simplifies routing down to the bare minimum.
+Note that your routes will automatically look into `./components` to find files,
+based on the name you give them.
 
-We map these routes to [react-router](https://github.com/rackt/react-router) by default.
+An example:
+```js
+routes(require,
+  route('home', route('sub')))
 
-You'll notice that the pre-defined routes all perfectly map to the structure of
-`./app/components`. To see more about how this works, check out reapp-routes.
+  // ./components/Home.jsx
+  // ./components/home/Sub.jsx
+```
 
 This is the reapp-routes syntax. The key to note here is the `require` that
 is passed to the routes function at the top level, which is how it dynamically
 requires your components based on the route tree.
 
-#### ./app/theme [reapp-ui](https://github.com/reapp/reapp-ui) (UI Kit)
+#### ./app/theme ([reapp-ui](https://github.com/reapp/reapp-ui) UI Kit)
 
-The next theme we require is the `./app/theme/theme.js` file. They have three things they
-need: constants, styles, and animations. You can just use the included iOS theme,
-but we've included the `./app/theme` folder as an example of how you can easily
-customize themes.
+The next theme we require is the `./app/theme/index.js`. Themes are loaded by calling
+`Reapp.theme()` and passing in an object with styles, constants and animations.
+You can just use the included iOS theme, but we've included the `./app/theme` folder
+as an example of how you can easily customize themes.
 
 For more documentation on themes, [read here](http://reapp.io/docs-themes.html).
+
+#### ./app/components/Home.jsx
+
+This is the first React component in your structure, as defined in your routes.
+Notice when we export it, we wrap it with `Reapp`. This helper function will provide
+the `this.context` variables that you've set up when you loaded your theme, actions,
+and store (if you decide to use all of those). It will also pass props to your Home route,
+`this.props.child` and `this.props.viewListProps`. You can see that they correspond
+to any children routes, and to properties needed to be on a `<ViewList>` that will handle
+those routes.
 
 #### More reading
 
@@ -252,3 +259,11 @@ We have two example apps you can check the source to:
 
 Sublime users, [here's a guide](https://medium.com/@dan_abramov/lint-like-it-s-2015-6987d44c5b48)
 for getting syntax highlighting, snippets and linting that works with babel.
+
+### Other reapp packages
+- [reapp-kit](https://github.com/reapp/reapp-kit) (Combines Reapp packages together)
+- [reapp-routes](https://github.com/reapp/reapp-routes) (Routes generator)
+- [reapp-ui](https://github.com/reapp/reapp-ui) (UI Kit)
+- [reapp](https://github.com/reapp/reapp-ui) (CLI)
+- [reapp-platform](https://github.com/reapp/reapp-platform) (Base utils)
+- [reapp-component](https://github.com/reapp/reapp-component) (DI and Factories)
