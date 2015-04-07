@@ -5,7 +5,6 @@ var colors = require('colors');
 var fs = require('fs');
 var rimraf = require('rimraf');
 var replace = require('replace');
-var Promise = require('bluebird').Promise;
 var mkdirp = require('mkdirp');
 
 Program
