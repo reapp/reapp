@@ -42,7 +42,7 @@ Usage: reapp [command]
   new [name]  creates a directory with a new reapp-starter scaffold
   run         runs a reapp application with express/webpack-dev-server
   build       builds a reapp application to a bundle in ./build
-  debug       use this to for opening issues!
+  debug       use this for opening issues!
 ```
 
 The build and run commands take a variety of options to help ease your development, such as:
