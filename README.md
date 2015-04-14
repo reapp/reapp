@@ -28,12 +28,10 @@ reapp run
 
 ### CLI
 
-The CLI has two main functions that it helps you with. The first is creating new apps.
-For now, it simply makes a bare clone of a repo we keep updated with the current best-practice.
-The goal is eventually to have a variety of baseline repo's to choose from.
+The CLI has three main functions: creating new apps, running them, and building them for release.
 
-It also lets you run your app, using [reapp-server](https://github.com/reapp/reapp-server),
-a simple express server that works well with the default app structure.
+Note that when you run your app, it will run in development mode by default which is much slower
+but easier to debug. Run it in production mode to get a feel for real-world performance.
 
 CLI Usage:
 ```
