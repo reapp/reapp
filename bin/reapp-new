@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var Program = require('commander');
+var Promise = require('es6-promise').Promise;
 var colors = require('colors');
 var fs = require('fs');
 var rimraf = require('rimraf');
