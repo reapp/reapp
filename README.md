@@ -66,7 +66,7 @@ Usage: reapp-build [options]
 
 ### Running & Building
 
-Use `reapp run` to server your app locally, by default at [localhost:3010](http://localhost:3010).
+Use `reapp run` to serve your app locally, by default at [localhost:3010](http://localhost:3010).
 The `run` command has a few options to help you out:
 
 - `reapp run -d` (debug) to output information on how it's running your app
