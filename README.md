@@ -153,7 +153,7 @@ based on the name you give them.
 An example:
 ```js
 routes(require,
-  route('home', route('sub')))
+  route('home', '/', route('sub')))
 
   // ./components/Home.jsx
   // ./components/home/Sub.jsx
