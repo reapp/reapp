@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+var Program = require('commander');
+var colors = require('colors');
+var pack = require('reapp-pack');
+var findConfig = require('../lib/findConfig');
+
+var dir = process.cwd();
+
+Program
+  .parse(process.argv);
+
+require('../lib/checkIsReapp')(dir);
+
+var args = Program.args;
+var type = args.length && args[0] || 'run';
+var platform = args.length && args[1] || 'web';
+
+var config = findConfig({
+  name: type,
+  platform: platform,
+  dir: dir,
+  debug: Program.debug
+});
+
+console.log(config);
+
+process.exit(0);

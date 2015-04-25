@@ -34,6 +34,7 @@
     "reapp-new": "./bin/reapp-new",
     "reapp-build": "./bin/reapp-build",
     "reapp-run": "./bin/reapp-run",
-    "reapp-debug": "./bin/reapp-debug"
+    "reapp-debug": "./bin/reapp-debug",
+    "reapp-config": "./bin/reapp-config"
   }
 }

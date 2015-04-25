@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+var Program = require('commander');
+var Promise = require('es6-promise').Promise;
+var colors = require('colors');
+var fs = require('fs');
+var rimraf = require('rimraf');
+var replace = require('replace');
+var mkdirp = require('mkdirp');
+
+Program
+  .option('-d, --debug', 'output extra information for debugging')
+  .parse(process.argv);
+
+var args = Program.args;
+
+if (args.length < 2) {
+  console.log('must give a name after "gen" (ex: reapp gen config)'.red);
+  process.exit(1);
+}
