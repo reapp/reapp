@@ -52,7 +52,7 @@ Usage: reapp-run [options]
   -p, --port [number]  specify a port [number]
   -h, --host [host]    specify hostname
   -b, --bind [address] specify bind address if different from host
-  -e, --env [env]      specify an enivornment
+  -e, --env [env]      specify an environment
   -t, --tool [tool]    specify a webpack devtool
 ```
 
