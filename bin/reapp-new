@@ -86,7 +86,7 @@ function cloneRepo() {
     console.log('Looking for template in %s', getRepo());
 
   return promiseProcess(
-    'git clone --depth=1 '+getRepo()+' '+ dest
+    'git clone --depth=1 '+getRepo()+' '+ "'" + dest + "'"
   );
 }
 
