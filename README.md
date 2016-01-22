@@ -73,6 +73,13 @@ The `run` command has a few options to help you out:
 - `reapp run -e production` (env=production) to run your app in production mode, which is much faster
 - `reapp run -t source-map` (tool=source-map) to have full sourcemaps rather than the "eval" style sourcemaps we default to
 
+If you run into a blank page after `reapp run`, try these commands.
+```
+npm install --save react@0.13.2
+npm install --save reapp-ui@0.12.54
+npm install --save reapp-kit@1.2.15
+```
+
 You also have the same flags available to build commands.
 
 The `build` command is used once you're ready to deploy your app (to either the web or to cordova). For now,
