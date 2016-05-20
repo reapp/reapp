@@ -35,7 +35,6 @@
     "reapp-build": "./bin/reapp-build",
     "reapp-run": "./bin/reapp-run",
     "reapp-debug": "./bin/reapp-debug",
-    "reapp-config": "./bin/reapp-config",
-    "babel": "^5.0.2"
+    "reapp-config": "./bin/reapp-config"
   }
 }
